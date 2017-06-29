@@ -1,0 +1,6 @@
+framework module Record360SDK {
+  umbrella header "Record360SDK-umbrella.h"
+
+  export *
+  module * { export * }
+}
