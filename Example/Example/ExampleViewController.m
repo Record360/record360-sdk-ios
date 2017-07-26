@@ -68,12 +68,7 @@ NSString * const USER_ID_KEY = @"user_id";
 }
 
 // This callback is called after the user has entered a reference id.  Use this to push data into Record360.
-- (void)onReferenceNumberEntered:(NSString *)referenceNumber completion:(void (^)(void))completion {
-    NSLog(@"Reference Number entered: %@", referenceNumber);
-    
-    // Get a list of fields for the transaction that's being input
-    NSArray *fieldData = [self.record360ViewController getFieldData];
-    
+- (NSArray<Record360FieldData *> *)onReferenceNumberEntered:(NSString *)referenceNumber fieldData:(NSArray<Record360FieldData *> *)fieldData {
     // Modify fields as appropriate.  This will place Sample Data in the first field on the form and the reference ID in the second field.
     if (fieldData.count > 2) {
         Record360FieldData *field = fieldData[0];
@@ -82,12 +77,7 @@ NSString * const USER_ID_KEY = @"user_id";
         field = fieldData[1];
         field.fieldValue = referenceNumber;
     }
-    
-    // Insert that data back into the form.
-    [self.record360ViewController setFieldData:fieldData];
-    
-    // Hand the processing back to the Record360ViewController
-    completion();
+    return fieldData;
 }
 
 - (void)onSuccessfulAuthenticationWithToken:(NSString *)userToken andUserId:(NSString *)userId {
@@ -168,7 +158,6 @@ NSString * const USER_ID_KEY = @"user_id";
                                                          [[Record360Setting alloc] initSwitchSetting:SETTING_NATIVE_PHOTO_MODE canDisplay:NO value:NO],
                                                          [[Record360Setting alloc] initOptionSetting:SETTING_RESOLUTION canDisplay:YES value:RESOLUTION_HIGH],
                                                          [[Record360Setting alloc] initOptionSetting:SETTING_UPLOAD_MODE canDisplay:YES value:UPLOAD_MODE_ONLINE],
-                                                         [[Record360Setting alloc] initOptionSetting:SETTING_LICENSE_REGION canDisplay:YES value:[Record360Setting getSettingOptionValueForNumber:@0 andSettingKey:SETTING_LICENSE_REGION]],
                                                          [[Record360Setting alloc] initSetting:SETTING_SEND_SUPPORT_LOG],
                                                          [[Record360Setting alloc] initSetting:SETTING_LOGOUT],
                                                          [[Record360Setting alloc] initSetting:SETTING_LINKS label:@"Access Records" link:@"https://app.record360.com"],
