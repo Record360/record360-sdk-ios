@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Lrh-fP-kRQ">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Example View Controller-->
+        <scene sceneID="bjG-iw-A3i">
+            <objects>
+                <viewController id="Lrh-fP-kRQ" customClass="ExampleViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jeF-Sl-Srf"/>
+                        <viewControllerLayoutGuide type="bottom" id="J3w-rU-ryU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="uHv-z5-TLj">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="APf-y3-Vgc" userLabel="Title">
+                                <rect key="frame" x="30" y="30" width="540" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="ppr-eo-rgd"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="Record360 SDK Example Client">
+                                        <attributes>
+                                            <font key="NSFont" size="24" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qSj-qk-Afj">
+                                <rect key="frame" x="20" y="76" width="560" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="XvC-on-Qng"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S57-ly-nLJ">
+                                <rect key="frame" x="20" y="126" width="560" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="iA2-IJ-asq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TBN-X5-zzA">
+                                <rect key="frame" x="30" y="176" width="540" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="NBw-cJ-3Y1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
+                                <state key="normal" title="Login"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="loginButtonPressed:" destination="Lrh-fP-kRQ" eventType="touchUpInside" id="dlK-jS-kzb"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="64u-Ib-QcJ">
+                                <rect key="frame" x="10" y="291" width="580" height="1"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="Cky-q8-3RG"/>
+                                    <constraint firstAttribute="height" constant="1" id="Go4-Fx-A16"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bfn-tK-7WY">
+                                <rect key="frame" x="30" y="239" width="540" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="gqr-ui-xjg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
+                                <state key="normal" title="Saved Login"/>
+                                <state key="disabled">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="savedLoginButtonPressed:" destination="Lrh-fP-kRQ" eventType="touchUpInside" id="tAM-Ug-XTn"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Ku-17-RuH">
+                                <rect key="frame" x="10" y="228" width="580" height="1"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="jpQ-m0-xGG"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ot3-fa-tvg">
+                                <rect key="frame" x="30" y="302" width="540" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="ouf-Y6-7a4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
+                                <state key="normal" title="Use SDK login"/>
+                                <state key="disabled">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="sdkLoginButtonPressed:" destination="Lrh-fP-kRQ" eventType="touchUpInside" id="pg7-w7-0Rd"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="APf-y3-Vgc" secondAttribute="trailing" constant="10" id="0cS-kc-eht"/>
+                            <constraint firstItem="APf-y3-Vgc" firstAttribute="top" secondItem="jeF-Sl-Srf" secondAttribute="bottom" constant="10" id="0mz-Mz-0WJ"/>
+                            <constraint firstItem="Ot3-fa-tvg" firstAttribute="top" secondItem="64u-Ib-QcJ" secondAttribute="bottom" constant="10" id="1kd-qd-onf"/>
+                            <constraint firstItem="Bfn-tK-7WY" firstAttribute="top" secondItem="4Ku-17-RuH" secondAttribute="bottom" constant="10" id="241-TW-Mm3"/>
+                            <constraint firstItem="S57-ly-nLJ" firstAttribute="top" secondItem="qSj-qk-Afj" secondAttribute="bottom" constant="10" id="5CQ-Ha-Syo"/>
+                            <constraint firstItem="Bfn-tK-7WY" firstAttribute="centerX" secondItem="uHv-z5-TLj" secondAttribute="centerX" id="8ZS-yG-RtF"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="TBN-X5-zzA" secondAttribute="trailing" constant="10" id="Etd-cR-gqe"/>
+                            <constraint firstAttribute="trailing" secondItem="4Ku-17-RuH" secondAttribute="trailing" constant="10" id="FFi-tw-1NW"/>
+                            <constraint firstItem="64u-Ib-QcJ" firstAttribute="leading" secondItem="uHv-z5-TLj" secondAttribute="leading" constant="10" id="G9N-Ie-90o"/>
+                            <constraint firstItem="S57-ly-nLJ" firstAttribute="centerX" secondItem="uHv-z5-TLj" secondAttribute="centerX" id="Gne-Ly-iA5"/>
+                            <constraint firstItem="S57-ly-nLJ" firstAttribute="trailing" secondItem="uHv-z5-TLj" secondAttribute="trailingMargin" id="Iu3-V2-w1B"/>
+                            <constraint firstItem="qSj-qk-Afj" firstAttribute="top" secondItem="APf-y3-Vgc" secondAttribute="bottom" constant="10" id="PHU-Jg-AGb"/>
+                            <constraint firstItem="qSj-qk-Afj" firstAttribute="leading" secondItem="uHv-z5-TLj" secondAttribute="leadingMargin" id="Qof-BU-odl"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Bfn-tK-7WY" secondAttribute="trailing" constant="10" id="SeG-jO-8Ed"/>
+                            <constraint firstItem="S57-ly-nLJ" firstAttribute="leading" secondItem="uHv-z5-TLj" secondAttribute="leadingMargin" id="Tox-tv-WDK"/>
+                            <constraint firstItem="TBN-X5-zzA" firstAttribute="leading" secondItem="uHv-z5-TLj" secondAttribute="leadingMargin" constant="10" id="UXJ-dc-ZmI"/>
+                            <constraint firstItem="4Ku-17-RuH" firstAttribute="top" secondItem="TBN-X5-zzA" secondAttribute="bottom" constant="10" id="dOH-9h-S7E"/>
+                            <constraint firstItem="qSj-qk-Afj" firstAttribute="centerX" secondItem="uHv-z5-TLj" secondAttribute="centerX" id="dug-dF-FPc"/>
+                            <constraint firstItem="Ot3-fa-tvg" firstAttribute="leading" secondItem="uHv-z5-TLj" secondAttribute="leadingMargin" constant="10" id="f5S-qU-3ZI"/>
+                            <constraint firstItem="TBN-X5-zzA" firstAttribute="top" secondItem="S57-ly-nLJ" secondAttribute="bottom" constant="10" id="f7H-hJ-XMh"/>
+                            <constraint firstAttribute="trailing" secondItem="64u-Ib-QcJ" secondAttribute="trailing" constant="10" id="fZI-V9-n08"/>
+                            <constraint firstItem="qSj-qk-Afj" firstAttribute="trailing" secondItem="uHv-z5-TLj" secondAttribute="trailingMargin" id="gNx-an-1LQ"/>
+                            <constraint firstItem="TBN-X5-zzA" firstAttribute="centerX" secondItem="uHv-z5-TLj" secondAttribute="centerX" id="gdu-jr-7wh"/>
+                            <constraint firstItem="Bfn-tK-7WY" firstAttribute="leading" secondItem="uHv-z5-TLj" secondAttribute="leadingMargin" constant="10" id="k5b-yH-yAE"/>
+                            <constraint firstItem="APf-y3-Vgc" firstAttribute="leading" secondItem="uHv-z5-TLj" secondAttribute="leadingMargin" constant="10" id="tuP-TY-F6v"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Ot3-fa-tvg" secondAttribute="trailing" constant="10" id="xpq-U7-G6i"/>
+                            <constraint firstItem="4Ku-17-RuH" firstAttribute="leading" secondItem="uHv-z5-TLj" secondAttribute="leading" constant="10" id="yki-Lq-PPr"/>
+                            <constraint firstItem="64u-Ib-QcJ" firstAttribute="top" secondItem="Bfn-tK-7WY" secondAttribute="bottom" constant="10" id="zA2-MF-IDZ"/>
+                        </constraints>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="600" height="600"/>
+                    <connections>
+                        <outlet property="password" destination="S57-ly-nLJ" id="1BK-3D-3rI"/>
+                        <outlet property="savedLogin" destination="Bfn-tK-7WY" id="Ge3-PX-jvD"/>
+                        <outlet property="username" destination="qSj-qk-Afj" id="eb0-3z-zww"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fQd-CW-mrc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-484.80000000000001" y="193.4032983508246"/>
+        </scene>
+    </scenes>
+</document>
