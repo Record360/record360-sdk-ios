@@ -19,8 +19,9 @@
 - (instancetype)initSetting:(NSString *)settingKey label:(NSString *)label recipient:(NSString *)recipient title:(NSString *)title;
 
 - (instancetype)initOptionSetting:(NSString *)settingKey value:(NSString *)value;
-- (instancetype)initSwitchSetting:(NSString *)settingKey value:(BOOL)value;
 - (instancetype)initOptionSetting:(NSString *)settingKey canDisplay:(BOOL)canDisplay value:(NSString *)value;
+
+- (instancetype)initSwitchSetting:(NSString *)settingKey value:(BOOL)value;
 - (instancetype)initSwitchSetting:(NSString *)settingKey canDisplay:(BOOL)canDisplay value:(BOOL)value;
 
 - (void)save;

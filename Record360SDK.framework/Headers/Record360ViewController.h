@@ -8,7 +8,7 @@
 #import "Record360Constants.h"
 #import "Record360Setting.h"
 
-@class Record360;
+@class Record360, Record360FieldData;
 
 @protocol Record360ViewControllerDelegate <NSObject>
 
@@ -16,15 +16,14 @@
 - (void)onTransactionCanceled;
 
 @optional
-- (void)onReferenceNumberEntered:(NSString *)referenceNumber completion:(void (^)(void))completion;
+
+- (NSArray<Record360FieldData *> *)onReferenceNumberEntered:(NSString *)referenceNumber fieldData:(NSArray<Record360FieldData *> *)fieldData;
 - (void)onSuccessfulAuthenticationWithToken:(NSString *)userToken andUserId:(NSString *)userId;
 - (void)onFailedAuthentication:(NSError *)error;
 
 @end
 
 @interface Record360ViewController : NSObject
-
-@property (nonatomic, weak) id<Record360ViewControllerDelegate> delegate;
 
 + (Record360ViewController *)loadControllerLoginAndSendTo:(Record360 *)record360 displayOn:(UIViewController *)rootViewController showCancelButton:(BOOL)showCancel;
 + (Record360ViewController *)loadControllerWithUserName:(NSString *)userName andPassword:(NSString *)password sendTo:(Record360 *)record360 displayOn:(UIViewController *)rootViewController;
@@ -36,8 +35,9 @@
 - (void)setShowOnboarding:(BOOL)showOnboarding;
 - (void)applySettings:(NSArray<Record360Setting *> *)settings;
 - (void)applyDefaultSettings:(NSArray<Record360Setting *> *)settings;
-- (NSArray *)getFieldData;
-- (void)setFieldData:(NSArray *)dataToPopulate;
+
+@property (nonatomic, weak) id<Record360ViewControllerDelegate> delegate;
+
 - (void)presentModalController:(UIViewController *)controller;
 
 @end
