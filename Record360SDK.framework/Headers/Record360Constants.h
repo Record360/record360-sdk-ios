@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2016 Record360. All rights reserved.
+// Copyright © 2016 Record360. All rights reserved.
 //
 
 typedef NS_ENUM(NSInteger, UploadMode) {
