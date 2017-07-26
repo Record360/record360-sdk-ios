@@ -2,5 +2,5 @@ use_frameworks!
 platform :ios, '8.0'
 
 target 'Example' do
-    pod 'Record360SDK', :git => 'https://github.com/Record360/record360-sdk-ios', :branch => 'framework'
+    pod 'Record360SDK', :git => 'https://github.com/Record360/record360-sdk-ios', :branch => 'master'
 end
