@@ -27,6 +27,6 @@
 - (NSUInteger)getTransactionsReadyForUploadCount;
 - (void)startUploading;
 - (void)stopUploading;
-- (void)showProgressDialogOnViewController:(UIViewController *)rootViewController onControllerClose:(void (^)())onClose;
+- (void)showProgressDialogOnViewController:(UIViewController *)rootViewController onControllerClose:(void (^)(void))onClose;
 
 @end
