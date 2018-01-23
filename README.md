@@ -11,7 +11,7 @@ The Record360SDK.framework is a Cocoa framework that allows mobile clients to le
 
 # Requirements
 
--   iOS 8.0 or later
+-   iOS 9.0 or later
 -   iPhone 4S and above.
 -   iPad 3 and above.
 -   iPad mini.
@@ -29,10 +29,10 @@ Record360 SDK can be installed using CocoaPods. CocoaPods is a dependency manage
 
 Create a Podfile in your Xcode project directory with the following lines.
     
-    platform :ios, '8.0'
+    platform :ios, '9.0'
     use_frameworks!
     
-    pod 'Record360SDK', '~> 1.0' 
+    pod 'Record360SDK', '~> 0.9' 
 
 From the command line execute `pod install` to add the Record360SDK.
 
@@ -97,7 +97,7 @@ Depending on the state of the transaction in the workflow, the user will either 
 	                      [[Record360Setting alloc] initSwitchSetting:SETTING_NOTATIONS_ON_IMAGES canDisplay:NO value:NO],
 	                      [[Record360Setting alloc] initSwitchSetting:SETTING_VIN_SCAN canDisplay:YES value:NO],
 	                      [[Record360Setting alloc] initSwitchSetting:SETTING_NATIVE_PHOTO_MODE canDisplay:NO value:NO],
-	                      [[Record360Setting alloc] initOptionSetting:SETTING_RESOLUTION canDisplay:YES value:RESOLUTION_HIGH],
+	                      [[Record360Setting alloc] initOptionSetting:SETTING_RESOLUTION canDisplay:YES value:RESOLUTION_MEDIUM],
 	                      [[Record360Setting alloc] initOptionSetting:SETTING_UPLOAD_MODE canDisplay:YES value:UPLOAD_MODE_ONLINE],
 	                      [[Record360Setting alloc] initSetting:SETTING_SEND_SUPPORT_LOG],
 	                      [[Record360Setting alloc] initSetting:SETTING_LOGOUT],
