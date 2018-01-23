@@ -27,11 +27,13 @@ extern NSString * const SETTING_NATIVE_PHOTO_MODE;
 extern NSString * const SETTING_NOTATIONS_ON_IMAGES;
 extern NSString * const SETTING_VIN_SCAN;
 extern NSString * const SETTING_REMEMBER_LOGIN;
+extern NSString * const SETTING_ADD_TIMESTAMP_TO_MEDIA;
 
 // Other settings
 extern NSString * const SETTING_ACCOUNT;
 extern NSString * const SETTING_LOGOUT;
 extern NSString * const SETTING_VERSION;
+extern NSString * const SETTING_SHOW_INTRO_VIDEO;
 extern NSString * const SETTING_SEND_SUPPORT_LOG;
 extern NSString * const SETTING_RATE_RECORD360;
 extern NSString * const SETTING_LINKS;
