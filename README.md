@@ -3,7 +3,7 @@
 Record360 iOS SDK
 ==================
 
-Last updated on – 06/30/2017
+Last updated on – 01/23/2018
 
 # Introduction
 
