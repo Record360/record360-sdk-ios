@@ -141,7 +141,7 @@ Implement the below Record360Delegate protocol to respond to transaction upload 
 
 Any object set up as the delegate of the Record360 object will receive these delegate callbacks that represent the different events that occur while a transaction is uploading.
 
-Please see the detailed instructions in our [SDK documentation](https://github.com/Record360/ios/blob/readme/SDK.pdf)
+Please see the detailed instructions in our [SDK documentation](https://github.com/Record360/record360-sdk-ios/blob/master/iOSSDK.pdf)
 
 # License
 
