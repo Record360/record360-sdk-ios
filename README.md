@@ -3,7 +3,7 @@
 Record360 iOS SDK
 ==================
 
-Last updated on – 03/19/2018
+Last updated on – 06/22/2018
 
 # Introduction
 
@@ -11,11 +11,11 @@ The Record360SDK.framework is a Cocoa framework that allows mobile clients to le
 
 # Requirements
 
--   iOS 9.0 or later
--   iPhone 4S and above.
--   iPad 3 and above.
--   iPad mini.
--   iPod Touch 5G and above.
+-   iOS 10.0 or later
+-   iPhone 5 and above.
+-   iPad 4 and above.
+-   iPad mini 2 and above .
+-   iPod Touch 6G and above.
 
 # Example
 
@@ -29,10 +29,10 @@ Record360 SDK can be installed using CocoaPods. CocoaPods is a dependency manage
 
 Create a Podfile in your Xcode project directory with the following lines.
     
-    platform :ios, '9.0'
+    platform :ios, '10.0'
     use_frameworks!
     
-    pod 'Record360SDK', '~> 1.2.0' 
+    pod 'Record360SDK', '~> 1.3.0' 
 
 From the command line execute `pod install` to add the Record360SDK.
 
@@ -60,17 +60,17 @@ Initialize a Record360 object and set its delegate.
 
 There are six ways to start the workflow.  See the below header for the Record360ViewController:
 
-    + (Record360ViewController *)loadControllerLoginAndSendTo:(Record360 *)record360 displayOn:(UIViewController *)rootViewController showCancelButton:(BOOL)showCancel;
-    
-    + (Record360ViewController *)loadControllerWithUserName:(NSString *)userName andPassword:(NSString *)password sendTo:(Record360 *)record360 displayOn:(UIViewController *)rootViewController;
-    
-    + (Record360ViewController *)loadControllerWithUserToken:(NSString *)userToken andUserId:(NSString *)userId sendTo:(Record360 *)record360 displayOn:(UIViewController *)rootViewController;
-    
-    + (Record360ViewController *)loadControllerLoginAndSendTo:(Record360 *)record360 withReferenceNumber:(NSString *)referenceNumber displayOn:(UIViewController *)rootViewController showCancelButton:(BOOL)showCancel;
-    
-    + (Record360ViewController *)loadControllerWithUserToken:(NSString *)userToken andUserId:(NSString *)userId andReferenceNumber:(NSString *)referenceNumber sendTo:(Record360 *)record360 displayOn:(UIViewController *)rootViewController;
-    
-    + (Record360ViewController *)loadControllerWithUserName:(NSString *)userName andPassword:(NSString *)password andReferenceNumber:(NSString *)referenceNumber sendTo:(Record360 *)record360 displayOn:(UIViewController *)rootViewController;
+    + (nonnull Record360ViewController *)loadControllerLoginAndSendTo:(nonnull Record360 *)record360 displayOn:(nonnull UIViewController *)rootViewController showCancelButton:(BOOL)showCancel;
+
+		+ (nonnull Record360ViewController *)loadControllerLoginAndSendTo:(nonnull Record360 *)record360 withReferenceNumber:(nonnull NSString *)referenceNumber displayOn:(nonnull UIViewController *)rootViewController showCancelButton:(BOOL)showCancel;
+
+		+ (nonnull Record360ViewController *)loadControllerWithUserName:(nonnull NSString *)userName andPassword:(nonnull NSString *)password sendTo:(nonnull Record360 *)record360 displayOn:(nonnull UIViewController *)rootViewController;
+
+		+ (nonnull Record360ViewController *)loadControllerWithUserName:(nonnull NSString *)userName andPassword:(nonnull NSString *)password andReferenceNumber:(nonnull NSString *)referenceNumber sendTo:(nonnull Record360 *)record360 displayOn:(nonnull UIViewController *)rootViewController;
+
+		+ (nonnull Record360ViewController *)loadControllerWithUserToken:(nonnull NSString *)userToken andUserId:(nonnull NSString *)userId sendTo:(nonnull Record360 *)record360 displayOn:(nonnull UIViewController *)rootViewController;
+		
+		+ (nonnull Record360ViewController *)loadControllerWithUserToken:(nonnull NSString *)userToken andUserId:(nonnull NSString *)userId andReferenceNumber:(nonnull NSString *)referenceNumber sendTo:(nonnull Record360 *)record360 displayOn:(nonnull UIViewController *)rootViewController;
 
 Entry points that begin with **loadControllerLoginAndSendTo** start the workflow with a provided login UI where the user can input their user name and password.  The other entry points authenticate and enter directly into the workflow.  Login credentials can be created through the Record360 API or by contacting support@record360.com.
 
@@ -116,9 +116,11 @@ Implement the below Record360ViewControllerDelegate protocol to respond to workf
 	- (void)onTransactionCanceled;
 
 	@optional
-	- (void)onReferenceNumberEntered:(NSString *)referenceNumber completion:(void (^)(void))completion;
-	- (void)onSuccessfulAuthenticationWithToken:(NSString *)userToken andUserId:(NSString *)userId;
-	- (void)onFailedAuthentication:(NSError *)error;
+
+	- (nonnull NSArray<Record360FieldData *> *)onReferenceNumberEntered:(nonnull NSString *)referenceNumber fieldData:(nonnull NSArray<Record360FieldData *> *)fieldData;
+	- (nonnull NSArray<Record360FieldData *> *)onContractFieldData:(nonnull NSArray<Record360FieldData *> *)fieldData;
+	- (void)onSuccessfulAuthenticationWithToken:(nonnull NSString *)userToken andUserId:(nonnull NSString *)userId;
+	- (void)onFailedAuthentication:(nonnull NSError *)error;
 
 	@end
 
@@ -130,12 +132,12 @@ Implement the below Record360Delegate protocol to respond to transaction upload 
 
 	@protocol Record360Delegate <NSObject>
 
-	- (void)onTransactionUploadedForReferenceNumber:(NSString *)referenceNumber;
-	- (void)onTransactionUploadFailedForReferenceNumber:(NSString *)referenceNumber withError:(NSError *)error;
-	- (void)onTransactionUploadDeletedForReferenceNumber:(NSString *)referenceNumber;
+	- (void)onTransactionUploadedForReferenceNumber:(nonnull NSString *)referenceNumber;
+	- (void)onTransactionUploadFailedForReferenceNumber:(nonnull NSString *)referenceNumber withError:(nonnull NSError *)error;
+	- (void)onTransactionUploadDeletedForReferenceNumber:(nonnull NSString *)referenceNumber;
 
 	@optional
-	- (void)onUploadBytesComplete:(long long)bytesComplete ofTotal:(long long)bytesTotal forReferenceNumber:(NSString *)referenceNumber;
+	- (void)onUploadBytesComplete:(long long)bytesComplete ofTotal:(long long)bytesTotal forReferenceNumber:(nonnull NSString *)referenceNumber;
 
 	@end
 
