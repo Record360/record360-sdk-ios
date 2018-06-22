@@ -6,7 +6,7 @@
 
 @interface Record360FieldData : NSObject
 
-@property(nonatomic, copy) NSString *fieldName;
-@property(nonatomic, copy) NSString *fieldValue;
+@property(nonatomic, copy, nullable) NSString *fieldName;
+@property(nonatomic, copy, nullable) NSString *fieldValue;
 
 @end

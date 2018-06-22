@@ -9,12 +9,12 @@
 
 @protocol Record360Delegate <NSObject>
 
-- (void)onTransactionUploadedForReferenceNumber:(NSString *)referenceNumber;
-- (void)onTransactionUploadFailedForReferenceNumber:(NSString *)referenceNumber withError:(NSError *)error;
-- (void)onTransactionUploadDeletedForReferenceNumber:(NSString *)referenceNumber;
+- (void)onTransactionUploadedForReferenceNumber:(nonnull NSString *)referenceNumber;
+- (void)onTransactionUploadFailedForReferenceNumber:(nonnull NSString *)referenceNumber withError:(nonnull NSError *)error;
+- (void)onTransactionUploadDeletedForReferenceNumber:(nonnull NSString *)referenceNumber;
 
 @optional
-- (void)onUploadBytesComplete:(long long)bytesComplete ofTotal:(long long)bytesTotal forReferenceNumber:(NSString *)referenceNumber;
+- (void)onUploadBytesComplete:(long long)bytesComplete ofTotal:(long long)bytesTotal forReferenceNumber:(nonnull NSString *)referenceNumber;
 
 @end
 
@@ -22,11 +22,11 @@
 
 @property (nonatomic, assign) UploadMode uploadMode;
 
-+ (void)setBaseAPIUrl:(NSString *)baseApiUrl;
-- (Record360 *)initWithDelegate:(id <Record360Delegate>)delegate;
++ (void)setBaseAPIUrl:(nonnull NSString *)baseApiUrl;
+- (nonnull Record360 *)initWithDelegate:(nullable id <Record360Delegate>)delegate;
 - (NSUInteger)getTransactionsReadyForUploadCount;
 - (void)startUploading;
 - (void)stopUploading;
-- (void)showProgressDialogOnViewController:(UIViewController *)rootViewController onControllerClose:(void (^)(void))onClose;
+- (void)showProgressDialogOnViewController:(nonnull UIViewController *)rootViewController onControllerClose:(nullable void (^)(void))onClose;
 
 @end
