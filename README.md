@@ -48,12 +48,18 @@ Initialize a Record360 object and set its delegate.
     
     #import <Record360SDK/Record360.h>
     
-    @interface MyApplicationHandler : NSObject <Record360Delegate>
+    @interface MyApplicationViewController () <Record360Delegate>
+
+    @property (nonatomic) Record360 *record360;
+
+    @end
+
+    @implementation
 
     - (void)viewDidLoad {
-    	[super viewDidLoad];
+      [super viewDidLoad];
 
-    	Record360 *record360 = [[Record360 alloc] initWithDelegate:self];
+      self.record360 = [[Record360 alloc] initWithDelegate:self];
     }
 
 ### Entering the workflow
@@ -76,20 +82,29 @@ Entry points that begin with **loadControllerLoginAndSendTo** start the workflow
 
 Initialize a Record360 object and pass it into a Record360ViewController factory method.
 
+    #import <Record360SDK/Record360.h>
     #import <Record360SDK/Record360ViewController.h>
     
-    @interface MyApplicationHandler : NSObject <Record360Delegate, Record360ViewControllerDelegate>
+    @interface MyApplicationViewController () <Record360Delegate, Record360ViewControllerDelegate>
+    
+    @property (nonatomic) Record360 *record360;
+
+    @end
+
+    @implementation
 
     - (void)viewDidLoad {
-    	[super viewDidLoad];
+      [super viewDidLoad];
 
-    	Record360 *record360 = [[Record360 alloc] initWithDelegate:self];
-
-    	Record360ViewController *record360ViewController = [Record360ViewController loadControllerWithUserName:@"testuser@record360.com" andPassword:@"P@ssword!" sendTo:record360 displayOn:self];
-    	record360ViewController.delegate = self;
+      self.record360 = [[Record360 alloc] initWithDelegate:self];
     }
 
-Depending on the state of the transaction in the workflow, the user will either be prompted to create a new transaction or resume their already existing transaction.
+    - (IBAction)startTransaction:(UIButton *)sender {
+      Record360ViewController *record360ViewController = [Record360ViewController loadControllerWithUserName:@"testuser@record360.com" andPassword:@"P@ssword!" sendTo:self.record360 displayOn:self];
+      record360ViewController.delegate = self;
+    }
+
+Depending on the state of the transaction in the workflow, the user will either be prompted to create a new transaction or resume their already existing transaction.  All entry points are asynchronous.  Any logic that depends on loading the Record360ViewController should be placed in the workflow event callbacks passed to your Record360ViewControllerDelegate object (see below).
 
 ### Adding workflow settings
 	
@@ -105,6 +120,8 @@ Depending on the state of the transaction in the workflow, the user will either 
 	                      [[Record360Setting alloc] initSetting:SETTING_LINKS label:@"Privacy" link:@"https://app.record360.com/privacy.html"],
 	                      [[Record360Setting alloc] initSetting:SETTING_VERSION]
 	                  ]];
+
+Settings should be applied in one of the workflow event callbacks called on your Record360ViewControllerDelegate object. 
 
 ### Responding to workflow events
 
@@ -124,7 +141,7 @@ Implement the below Record360ViewControllerDelegate protocol to respond to workf
 
 	@end
 
-Any object set up as the delegate of the Record360ViewController object will receive these delegate callbacks that represent the different events that occur during the workflow.
+Any object set up as the delegate of the Record360ViewController object will receive these delegate callbacks that represent the different events that occur during a transaction.
 
 ### Responding to transaction upload events
 
