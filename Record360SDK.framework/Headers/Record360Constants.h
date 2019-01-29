@@ -5,13 +5,15 @@
 typedef NS_ENUM(NSInteger, UploadMode) {
     UploadModeOnline,
     UploadModeOffline,
-    UploadModeWifiOnly
+    UploadModeWifiOnly,
+    UploadModeHybrid
 };
 
 // Setting
 extern NSString * const SETTING_UPLOAD_MODE;
 // Possible values
 extern NSString * const UPLOAD_MODE_ONLINE;
+extern NSString * const UPLOAD_MODE_HYBRID;
 extern NSString * const UPLOAD_MODE_WIFI_ONLY;
 extern NSString * const UPLOAD_MODE_OFFLINE;
 
