@@ -3,7 +3,7 @@
 Record360 iOS SDK
 ==================
 
-Last updated on – 08/27/2018
+Last updated on – 08/29/2018
 
 # Introduction
 
@@ -68,15 +68,15 @@ There are six ways to start the workflow.  See the below header for the Record36
 
     + (nonnull Record360ViewController *)loadControllerLoginAndSendTo:(nonnull Record360 *)record360 displayOn:(nonnull UIViewController *)rootViewController showCancelButton:(BOOL)showCancel;
 
-		+ (nonnull Record360ViewController *)loadControllerLoginAndSendTo:(nonnull Record360 *)record360 withReferenceNumber:(nonnull NSString *)referenceNumber displayOn:(nonnull UIViewController *)rootViewController showCancelButton:(BOOL)showCancel;
+    + (nonnull Record360ViewController *)loadControllerLoginAndSendTo:(nonnull Record360 *)record360 withReferenceNumber:(nonnull NSString *)referenceNumber displayOn:(nonnull UIViewController *)rootViewController showCancelButton:(BOOL)showCancel;
 
-		+ (nonnull Record360ViewController *)loadControllerWithUserName:(nonnull NSString *)userName andPassword:(nonnull NSString *)password sendTo:(nonnull Record360 *)record360 displayOn:(nonnull UIViewController *)rootViewController;
+    + (nonnull Record360ViewController *)loadControllerWithUserName:(nonnull NSString *)userName andPassword:(nonnull NSString *)password sendTo:(nonnull Record360 *)record360 displayOn:(nonnull UIViewController *)rootViewController;
 
-		+ (nonnull Record360ViewController *)loadControllerWithUserName:(nonnull NSString *)userName andPassword:(nonnull NSString *)password andReferenceNumber:(nonnull NSString *)referenceNumber sendTo:(nonnull Record360 *)record360 displayOn:(nonnull UIViewController *)rootViewController;
+    + (nonnull Record360ViewController *)loadControllerWithUserName:(nonnull NSString *)userName andPassword:(nonnull NSString *)password andReferenceNumber:(nonnull NSString *)referenceNumber sendTo:(nonnull Record360 *)record360 displayOn:(nonnull UIViewController *)rootViewController;
 
-		+ (nonnull Record360ViewController *)loadControllerWithUserToken:(nonnull NSString *)userToken andUserId:(nonnull NSString *)userId sendTo:(nonnull Record360 *)record360 displayOn:(nonnull UIViewController *)rootViewController;
-		
-		+ (nonnull Record360ViewController *)loadControllerWithUserToken:(nonnull NSString *)userToken andUserId:(nonnull NSString *)userId andReferenceNumber:(nonnull NSString *)referenceNumber sendTo:(nonnull Record360 *)record360 displayOn:(nonnull UIViewController *)rootViewController;
+    + (nonnull Record360ViewController *)loadControllerWithUserToken:(nonnull NSString *)userToken andUserId:(nonnull NSString *)userId sendTo:(nonnull Record360 *)record360 displayOn:(nonnull UIViewController *)rootViewController;
+    
+    + (nonnull Record360ViewController *)loadControllerWithUserToken:(nonnull NSString *)userToken andUserId:(nonnull NSString *)userId andReferenceNumber:(nonnull NSString *)referenceNumber sendTo:(nonnull Record360 *)record360 displayOn:(nonnull UIViewController *)rootViewController;
 
 Entry points that begin with **loadControllerLoginAndSendTo** start the workflow with a provided login UI where the user can input their user name and password.  The other entry points authenticate and enter directly into the workflow.  Login credentials can be created through the Record360 API or by contacting support@record360.com.
 
@@ -107,39 +107,39 @@ Initialize a Record360 object and pass it into a Record360ViewController factory
 Depending on the state of the transaction in the workflow, the user will either be prompted to create a new transaction or resume their already existing transaction.  All entry points are asynchronous.  Any logic that depends on loading the Record360ViewController should be placed in the workflow event callbacks passed to your Record360ViewControllerDelegate object (see below).
 
 ### Adding workflow settings
-	
-	  [record360ViewController applyDefaultSettings:@[
-	                      [[Record360Setting alloc] initSwitchSetting:SETTING_NOTATIONS_ON_IMAGES canDisplay:NO value:NO],
-	                      [[Record360Setting alloc] initSwitchSetting:SETTING_VIN_SCAN canDisplay:YES value:NO],
-	                      [[Record360Setting alloc] initSwitchSetting:SETTING_NATIVE_PHOTO_MODE canDisplay:NO value:NO],
-	                      [[Record360Setting alloc] initOptionSetting:SETTING_RESOLUTION canDisplay:YES value:RESOLUTION_MEDIUM],
-	                      [[Record360Setting alloc] initOptionSetting:SETTING_UPLOAD_MODE canDisplay:YES value:UPLOAD_MODE_ONLINE],
-	                      [[Record360Setting alloc] initSetting:SETTING_SEND_SUPPORT_LOG],
-	                      [[Record360Setting alloc] initSetting:SETTING_LOGOUT],
-	                      [[Record360Setting alloc] initSetting:SETTING_RATE_RECORD360],
-	                      [[Record360Setting alloc] initSetting:SETTING_LINKS label:@"Privacy" link:@"https://app.record360.com/privacy.html"],
-	                      [[Record360Setting alloc] initSetting:SETTING_VERSION]
-	                  ]];
+  
+    [record360ViewController applyDefaultSettings:@[
+                        [[Record360Setting alloc] initSwitchSetting:SETTING_NOTATIONS_ON_IMAGES canDisplay:NO value:NO],
+                        [[Record360Setting alloc] initSwitchSetting:SETTING_VIN_SCAN canDisplay:YES value:NO],
+                        [[Record360Setting alloc] initSwitchSetting:SETTING_NATIVE_PHOTO_MODE canDisplay:NO value:NO],
+                        [[Record360Setting alloc] initOptionSetting:SETTING_RESOLUTION canDisplay:YES value:RESOLUTION_MEDIUM],
+                        [[Record360Setting alloc] initOptionSetting:SETTING_UPLOAD_MODE canDisplay:YES value:UPLOAD_MODE_ONLINE],
+                        [[Record360Setting alloc] initSetting:SETTING_SEND_SUPPORT_LOG],
+                        [[Record360Setting alloc] initSetting:SETTING_LOGOUT],
+                        [[Record360Setting alloc] initSetting:SETTING_RATE_RECORD360],
+                        [[Record360Setting alloc] initSetting:SETTING_LINKS label:@"Privacy" link:@"https://app.record360.com/privacy.html"],
+                        [[Record360Setting alloc] initSetting:SETTING_VERSION]
+                    ]];
 
 Settings should be applied in one of the workflow event callbacks called on your Record360ViewControllerDelegate object. 
 
 ### Responding to workflow events
 
 Implement the below Record360ViewControllerDelegate protocol to respond to workflow events:
-	
-	@protocol Record360ViewControllerDelegate <NSObject>
+  
+    @protocol Record360ViewControllerDelegate <NSObject>
 
-	- (void)onTransactionComplete;
-	- (void)onTransactionCanceled;
+    - (void)onTransactionComplete;
+    - (void)onTransactionCanceled;
 
-	@optional
+    @optional
 
-	- (nonnull NSArray<Record360FieldData *> *)onReferenceNumberEntered:(nonnull NSString *)referenceNumber fieldData:(nonnull NSArray<Record360FieldData *> *)fieldData;
-	- (nonnull NSArray<Record360FieldData *> *)onContractFieldData:(nonnull NSArray<Record360FieldData *> *)fieldData;
-	- (void)onSuccessfulAuthenticationWithToken:(nonnull NSString *)userToken andUserId:(nonnull NSString *)userId;
-	- (void)onFailedAuthentication:(nonnull NSError *)error;
+    - (nonnull NSArray<Record360FieldData *> *)onReferenceNumberEntered:(nonnull NSString *)referenceNumber fieldData:(nonnull NSArray<Record360FieldData *> *)fieldData;
+    - (nonnull NSArray<Record360FieldData *> *)onContractFieldData:(nonnull NSArray<Record360FieldData *> *)fieldData;
+    - (void)onSuccessfulAuthenticationWithToken:(nonnull NSString *)userToken andUserId:(nonnull NSString *)userId;
+    - (void)onFailedAuthentication:(nonnull NSError *)error;
 
-	@end
+    @end
 
 Any object set up as the delegate of the Record360ViewController object will receive these delegate callbacks that represent the different events that occur during a transaction.
 
@@ -147,16 +147,16 @@ Any object set up as the delegate of the Record360ViewController object will rec
 
 Implement the below Record360Delegate protocol to respond to transaction upload events:
 
-	@protocol Record360Delegate <NSObject>
+    @protocol Record360Delegate <NSObject>
 
-	- (void)onTransactionUploadedForReferenceNumber:(nonnull NSString *)referenceNumber;
-	- (void)onTransactionUploadFailedForReferenceNumber:(nonnull NSString *)referenceNumber withError:(nonnull NSError *)error;
-	- (void)onTransactionUploadDeletedForReferenceNumber:(nonnull NSString *)referenceNumber;
+    - (void)onTransactionUploadedForReferenceNumber:(nonnull NSString *)referenceNumber;
+    - (void)onTransactionUploadFailedForReferenceNumber:(nonnull NSString *)referenceNumber withError:(nonnull NSError *)error;
+    - (void)onTransactionUploadDeletedForReferenceNumber:(nonnull NSString *)referenceNumber;
 
-	@optional
-	- (void)onUploadBytesComplete:(long long)bytesComplete ofTotal:(long long)bytesTotal forReferenceNumber:(nonnull NSString *)referenceNumber;
+    @optional
+    - (void)onUploadBytesComplete:(long long)bytesComplete ofTotal:(long long)bytesTotal forReferenceNumber:(nonnull NSString *)referenceNumber;
 
-	@end
+    @end
 
 Any object set up as the delegate of the Record360 object will receive these delegate callbacks that represent the different events that occur while a transaction is uploading.
 
