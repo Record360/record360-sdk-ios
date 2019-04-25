@@ -2,5 +2,5 @@ use_frameworks!
 platform :ios, '10.0'
 
 target 'Example' do
-    pod 'Record360SDK', '1.6.1'
+    pod 'Record360SDK', '1.6.2'
 end
