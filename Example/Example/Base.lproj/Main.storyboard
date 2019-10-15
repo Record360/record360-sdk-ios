@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Lrh-fP-kRQ">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Lrh-fP-kRQ">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Example View Controller-->
         <scene sceneID="bjG-iw-A3i">
             <objects>
-                <viewController id="Lrh-fP-kRQ" customClass="ExampleViewController" sceneMemberID="viewController">
+                <viewController modalPresentationStyle="fullScreen" id="Lrh-fP-kRQ" customClass="ExampleViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jeF-Sl-Srf"/>
                         <viewControllerLayoutGuide type="bottom" id="J3w-rU-ryU"/>
@@ -23,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="APf-y3-Vgc" userLabel="Title">
-                                <rect key="frame" x="30" y="30" width="540" height="36"/>
+                                <rect key="frame" x="30" y="10" width="540" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="ppr-eo-rgd"/>
                                 </constraints>
@@ -38,7 +35,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qSj-qk-Afj">
-                                <rect key="frame" x="20" y="76" width="560" height="40"/>
+                                <rect key="frame" x="20" y="56" width="560" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="XvC-on-Qng"/>
                                 </constraints>
@@ -46,7 +43,7 @@
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S57-ly-nLJ">
-                                <rect key="frame" x="20" y="126" width="560" height="40"/>
+                                <rect key="frame" x="20" y="106" width="560" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="iA2-IJ-asq"/>
                                 </constraints>
@@ -54,7 +51,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TBN-X5-zzA">
-                                <rect key="frame" x="30" y="176" width="540" height="42"/>
+                                <rect key="frame" x="30" y="156" width="540" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="NBw-cJ-3Y1"/>
                                 </constraints>
@@ -70,7 +67,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="64u-Ib-QcJ">
-                                <rect key="frame" x="10" y="291" width="580" height="1"/>
+                                <rect key="frame" x="10" y="271" width="580" height="1"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="Cky-q8-3RG"/>
@@ -78,7 +75,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bfn-tK-7WY">
-                                <rect key="frame" x="30" y="239" width="540" height="42"/>
+                                <rect key="frame" x="30" y="219" width="540" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="gqr-ui-xjg"/>
                                 </constraints>
@@ -97,14 +94,14 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Ku-17-RuH">
-                                <rect key="frame" x="10" y="228" width="580" height="1"/>
+                                <rect key="frame" x="10" y="208" width="580" height="1"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="jpQ-m0-xGG"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ot3-fa-tvg">
-                                <rect key="frame" x="30" y="302" width="540" height="42"/>
+                                <rect key="frame" x="30" y="282" width="540" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="ouf-Y6-7a4"/>
                                 </constraints>
