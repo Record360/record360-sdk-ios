@@ -1,0 +1,8 @@
+mutation {
+    removePushNotificationId {
+        user {
+            id
+            pushNotifications
+        }
+    }
+}

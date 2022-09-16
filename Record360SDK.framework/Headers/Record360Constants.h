@@ -9,6 +9,13 @@ typedef NS_ENUM(NSInteger, UploadMode) {
     UploadModeHybrid
 };
 
+typedef NS_ENUM(NSInteger, RefreshTokenError) {
+    RefreshErrorNoUser,
+    RefreshErrorFailedLogin,
+    RefreshErrorWrongUser,
+    RefreshErrorInactiveUser
+};
+
 // Setting
 extern NSString * const SETTING_UPLOAD_MODE;
 // Possible values
@@ -40,3 +47,12 @@ extern NSString * const SETTING_SEND_SUPPORT_LOG;
 extern NSString * const SETTING_RATE_RECORD360;
 extern NSString * const SETTING_LINKS;
 extern NSString * const SETTING_SEND_EMAIL;
+extern NSString * const SETTING_BARCODE_CONFIDENCE;
+
+// Symbology Mode Setting
+extern NSString * const SETTING_BARCODE_SYMBOLOGIES;
+// Possible values
+extern NSString * const SYMBOLOGIES_ALL;
+extern NSString * const SYMBOLOGIES_VIN_SCAN;
+extern NSString * const SYMBOLOGIES_QR_SCAN;
+extern NSString * const SYMBOLOGIES_DATA_MATRIX;

@@ -1,0 +1,71 @@
+fragment inspectionFields on Inspection {
+    id
+    createdAt
+    department {
+        id
+        label
+    }
+    draft
+    event
+    extended
+    notations
+    forms {
+        nodes {
+            id
+            values
+            template {
+                id
+            }
+        }
+    }
+    mailTo
+    reference
+    typeLabel
+    workOrder {
+        id
+    }
+    workflow {
+        id
+    }
+    workflowModules
+    workflowName
+    photos {
+        nodes {
+            createdAt
+            imageUrl
+            id
+            notation
+            resolution {
+                width
+                height
+            }
+            size
+            thumbnailUrl
+        }
+    }
+    videos {
+        nodes {
+            id
+            createdAt
+            duration
+            resolution {
+                width
+                height
+            }
+            size
+            thumbnailUrl
+            videoUrl
+        }
+    }
+    sequence
+    signatures {
+        nodes {
+            id
+            createdAt
+            imageUrl
+            name
+            size
+            thumbnailUrl
+        }
+    }
+}

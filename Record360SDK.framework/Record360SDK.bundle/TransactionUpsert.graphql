@@ -1,0 +1,7 @@
+mutation TransactionUpsert($input: TransactionUpsertInput!) {
+	transactionUpsert(input: $input) {
+		transaction {
+			...transactionFields
+		}
+	}
+}

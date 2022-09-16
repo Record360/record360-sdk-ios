@@ -1,0 +1,15 @@
+mutation CreateTaskComment($targetId:ID! $body: String!) {
+    commentCreate(input: {
+        targetType: Task,
+        targetId: $targetId,
+        body: $body
+    }) {
+        comment {
+            id
+            body
+            createdAt
+            user { id name firstName lastName }
+            attachments { edges { node { id filename url type } } }
+        }
+    }
+}

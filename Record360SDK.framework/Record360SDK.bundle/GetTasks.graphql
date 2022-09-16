@@ -1,0 +1,19 @@
+query($assignee: [ID!], $company: [ID!], $dueUntil: ISO8601DateTime, $dueSince: ISO8601DateTime, $status: [TaskStatus!], $type: String) {
+    tasks(assignee: $assignee, company: $company, dueUntil: $dueUntil, dueSince: $dueSince, status: $status, type: $type, orderBy: {field: DUE_BY, direction: ASC}) {
+        nodes {
+            id
+            assignee { id name email }
+            createdAt
+            draft { id department { id } }
+            description
+            dueBy
+            highPriority
+            location { id name company { id name } }
+            name
+            requester { id name }
+            status
+            type
+            unit { id externalId }
+        }
+    }
+}
