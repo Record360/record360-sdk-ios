@@ -1,0 +1,5 @@
+query GetUnitWithId($id: String, $departmentId: [ID!], $open: Boolean) {
+  unit(externalId: $id) {
+	  ...unitFields
+  }
+}

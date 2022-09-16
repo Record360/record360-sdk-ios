@@ -1,0 +1,11 @@
+query ($first: Int! $after: String $name: String $company: [ID!] $activeCompany: Boolean) {
+    locations (first: $first after: $after name: $name company: $company activeCompany: $activeCompany) {
+        edges { cursor
+            node {
+                id
+                name
+                company { id name }
+            }
+        }
+    }
+}

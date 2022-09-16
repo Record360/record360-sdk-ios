@@ -1,0 +1,16 @@
+mutation($name: String!, $description: String!, $dueBy: ISO8601DateTime, $priority: Int, $location: ID, $assignee: ID, $unit: ID) {
+    taskCreate(input: {
+        name: $name,
+        description: $description,
+        dueBy: $dueBy,
+        priority: $priority,
+        location: $location,
+        assignee: $assignee,
+        draft: null,
+        unit: $unit
+    }) {
+        task {
+            id assignee { id email }
+        }
+    }
+}

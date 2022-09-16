@@ -1,0 +1,15 @@
+mutation ($targetType: AttachmentTarget!, $targetId: ID!, $description: String!, $file: File!) {
+    attachmentCreate(input: {
+            targetType: $targetType,
+            targetId: $targetId,
+            description: $description,
+            file: $file
+        }) {
+        attachment {
+            id
+            url
+            type
+            filename
+        }
+    }
+}

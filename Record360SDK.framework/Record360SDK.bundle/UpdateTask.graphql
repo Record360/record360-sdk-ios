@@ -1,0 +1,58 @@
+mutation UpdateTask($id: ID!, $assignee: ID, $description: String, $dueBy: ISO8601DateTime, $location: ID, $priority: Int , $taskName: String, $status: TaskStatus, $unit: ID) {
+    taskUpdate(id: $id,
+        input: {
+            assignee: $assignee
+            description: $description
+            dueBy: $dueBy
+            location: $location
+            name: $taskName
+            priority: $priority
+            status: $status,
+            unit: $unit
+        }
+    ) {
+        task {
+            id
+            name
+            description
+            status
+            type
+            unit { id externalId }
+            location { id name company { id } }
+            assignee { id name email }
+            dueBy
+            highPriority
+            updatedAt
+            requester { name email}
+            activities {
+                nodes {
+                    event
+                    createdAt
+                    user { name email }
+                }
+            }
+            comments {
+                nodes {
+                    id
+                    body
+                    user {
+                        id
+                        name
+                        email
+                    }
+                    targetId
+                    updatedAt
+                    attachments {
+                        nodes {
+                            id
+                            filename
+                            createdAt
+                            description
+                            url
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

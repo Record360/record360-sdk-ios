@@ -1,0 +1,8 @@
+mutation($notificationId: ID!) {
+    addPushNotificationId(pushNotificationId: $notificationId) {
+        user {
+            id
+            pushNotifications
+        }
+    }
+}

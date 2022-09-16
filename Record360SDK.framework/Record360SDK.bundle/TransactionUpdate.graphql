@@ -1,0 +1,7 @@
+mutation TransactionUpdate($transactionId: ID!, $input: TransactionUpdateInput!) {
+	transactionUpdate(id: $transactionId, input: $input) {
+		transaction {
+			...transactionFields
+		}
+	}
+}

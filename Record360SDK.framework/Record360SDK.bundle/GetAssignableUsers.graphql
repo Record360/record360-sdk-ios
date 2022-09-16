@@ -1,0 +1,20 @@
+query ($first: Int! $after: String $fullName: String $location: [ID!]) {
+    users (first: $first after: $after fullName: $fullName location: $location){
+        edges {
+            cursor
+            node {
+                id
+                firstName
+                lastName
+                name
+                active
+                role
+                email
+                phoneNumber
+                location { id name timezone }
+                enabledFeatures
+                company { id name active }
+            }
+        }
+    }
+}
