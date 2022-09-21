@@ -19,7 +19,6 @@ Pod::Spec.new do |s|
 
 	s.dependency 'AFNetworking', '4.0.1'
 	s.dependency 'CocoaLumberjack', '3.7.4'
-	s.dependency 'MBProgressHUD', '1.2.0'
 	s.dependency 'Realm', '10.25.0'
 	s.dependency 'Analytics', '4.1.6'
 	s.dependency 'Segment-Amplitude', '3.2.3'
