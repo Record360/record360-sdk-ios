@@ -1,5 +1,6 @@
 fragment inspectionFields on Inspection {
     id
+    archiveStatus
     createdAt
     department {
         id
