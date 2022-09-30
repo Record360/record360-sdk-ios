@@ -98,9 +98,8 @@ Your class should now look something like this:
 
 4. Proceed through the Record360 application flow:
 
-![Car Front](./images/car-front.png)
-
-![Car Angle](./images/car-angle.png)
+<img src="./images/car-front.png" width="300">
+<img src="./images/car-angle.png" width="300">
 
 5. After the inspection has finished or is canceled by the user, one of the Record360ViewController delegate methods will be called.
 
