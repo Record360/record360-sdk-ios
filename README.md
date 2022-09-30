@@ -3,7 +3,7 @@
 Record360 iOS SDK
 ==================
 
-![Record360 Logo](./images/360-logo.png)
+![Record360 Logo](https://r360-public-media.s3.amazonaws.com/screenshots/cocoapods-sdk/360-logo.png)
 
 # Introduction
 
@@ -27,7 +27,7 @@ In order to utilize the SDK framework, an account with Record360 is required.  P
 
 This SDK is not compatible with dark mode.  Please add the **Appearance** property to your info.plist file like this:
 
-![Appearance Screenshot](./images/appearance.png)
+![Appearance Screenshot](https://r360-public-media.s3.amazonaws.com/screenshots/cocoapods-sdk/appearance.png)
 
 # Installation with CocoaPods
 
