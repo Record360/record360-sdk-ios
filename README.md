@@ -96,19 +96,14 @@ Your class should now look something like this:
 }
 ```
 
-4. Proceed through the Record360 application flow:
-
-<img src="./images/car-front.png" width="300">
-<img src="./images/car-angle.png" width="300">
-
-5. After the inspection has finished or is canceled by the user, one of the Record360ViewController delegate methods will be called.
+4. After the inspection has finished or is canceled by the user, one of the Record360ViewController delegate methods will be called.
 
 ```objectivec
 - (void)onInspectionComplete;
 - (void)onInspectionCanceled;
 ```
 
-6. If the inspection is uploading, implement the callbacks as specified by the Record360Delegate protocol.  When the Record360 object has finished uploading an inspection, one of the Record360Delegate methods will be called.
+5. If the inspection is uploading, implement the callbacks as specified by the Record360Delegate protocol.  When the Record360 object has finished uploading an inspection, one of the Record360Delegate methods will be called.
 
 ```objectivec
 - (void)onInspectionUploadedForReferenceNumber:(nonnull NSString *)referenceNumber;
