@@ -3,7 +3,7 @@
 Record360 iOS SDK
 ==================
 
-Last updated on – 09/22/2022
+![Record360 Logo](./images/360-logo.png)
 
 # Introduction
 
@@ -21,20 +21,32 @@ The Record360SDK.framework is a Cocoa framework that allows mobile clients to le
 
 To run the example project, clone the repo, and run `pod install` from the Example directory.
 
+# Preparation
+
+In order to utilize the SDK framework, an account with Record360 is required.  Please contact sales@record360.com for details.
+
+This SDK is not compatible with dark mode.  Please add the **Appearance** property to your info.plist file like this:
+
+![Appearance Screenshot](./images/appearance.png)
+
 # Installation with CocoaPods
 
-Record360 SDK can be installed using CocoaPods. CocoaPods is a dependency manager that automates and simplifies the process of integrating 3rd-party libraries into your projects.  If you do not have CocoaPods, please see [CocoaPods](http://cocoapods.org) for details on how to install it.
+Record360 SDK can be installed using CocoaPods. CocoaPods is a dependency manager that automates the process of integrating 3rd-party libraries into your projects.  If you do not have CocoaPods, please see [CocoaPods](http://cocoapods.org) for details on how to install it.
 
 ### Podfile
 
 Create a Podfile in your Xcode project directory with the following lines.
     
-    platform :ios, '12.0'
-    use_frameworks!
-    
-    pod 'Record360SDK', '~> 4.9.5' 
+```ruby
+platform :ios, '12.0'
+use_frameworks!
+
+pod 'Record360SDK', '~> 4.9.5' 
+```
 
 From the command line execute `pod install` to add the Record360SDK.
+
+Note: If you want Drivers License verification functionality packed into the SDK, please contact us at sales@record360.com.
 
 # Installation without CocoaPods
 
@@ -44,121 +56,253 @@ Record360 can provide the framework, contact support@record360.com for more info
 
 ### Starting the inspection upload handling process
 
-Initialize a Record360 object and set its delegate.
-    
-    #import <Record360SDK/Record360.h>
-    
-    @interface MyApplicationViewController () <Record360Delegate>
+1. Designate a Record360Delegate that will handle inspection upload events.  Note that the upload process is asynchronous, so the delegate will not be called immediately after the process completes.
 
-    @property (nonatomic) Record360 *record360;
+```objectivec    
+@interface MyApplicationViewController () <Record360Delegate>
+```
 
-    @end
+2. Create a Record360 object that will handle file uploads and provide information about upload progress events to a delegate.  Pass in the delegate to handle the inspection upload events.
 
-    @implementation
+```objectivec    
+Record360 *record360 = [[Record360 alloc] initWithDelegate:self];
+```
 
-    - (void)viewDidLoad {
-      [super viewDidLoad];
+3. Create a Record360ViewController object.  Pass in the login credentials, the already created record360 object, and a UIViewController to display the workflow process on.  Then set the delegate of the record360ViewController object in order to respond to workflow events.
 
-      self.record360 = [[Record360 alloc] initWithDelegate:self];
-    }
+```objectivec    
+Record360ViewController *record360ViewController = [Record360ViewController loadControllerWithUserName:@"testuser@record360.com" andPassword:@"P@ssword!" sendTo:record360 displayOn:self]];
 
-### Entering the workflow
+record360ViewController.delegate = self;
+```
 
-There are six ways to start the workflow.  See the below header for the Record360ViewController:
+Your class should now look something like this:
 
-    + (Record360ViewController *)loadControllerLoginAndSendTo:(Record360 *)record360 displayOn:(UIViewController *)rootViewController showCancelButton:(BOOL)showCancel;
-    
-    + (Record360ViewController *)loadControllerWithUserName:(NSString *)userName andPassword:(NSString *)password sendTo:(Record360 *)record360 displayOn:(UIViewController *)rootViewController;
-    
-    + (Record360ViewController *)loadControllerWithUserToken:(NSString *)userToken andUserId:(NSString *)userId sendTo:(Record360 *)record360 displayOn:(UIViewController *)rootViewController;
-    
-    + (Record360ViewController *)loadControllerLoginAndSendTo:(Record360 *)record360 withReferenceNumber:(NSString *)referenceNumber displayOn:(UIViewController *)rootViewController showCancelButton:(BOOL)showCancel;
-    
-    + (Record360ViewController *)loadControllerWithUserToken:(NSString *)userToken andUserId:(NSString *)userId andReferenceNumber:(NSString *)referenceNumber sendTo:(Record360 *)record360 displayOn:(UIViewController *)rootViewController;
-    
-    + (Record360ViewController *)loadControllerWithUserName:(NSString *)userName andPassword:(NSString *)password andReferenceNumber:(NSString *)referenceNumber sendTo:(Record360 *)record360 displayOn:(UIViewController *)rootViewController;
+```objectivec    
+#import <Record360SDK/Record360.h>
 
-Entry points that begin with **loadControllerLoginAndSendTo** start the workflow with a provided login UI where the user can input their user name and password.  The other entry points authenticate and enter directly into the workflow.  Login credentials can be created through the Record360 API or by contacting support@record360.com.
+@interface MyApplicationViewController () <Record360Delegate>
 
-Initialize a Record360 object and pass it into a Record360ViewController factory method.
-    
-    #import <Record360SDK/Record360.h>
-    #import <Record360SDK/Record360ViewController.h>
-    
-    @interface MyApplicationViewController () <Record360Delegate, Record360ViewControllerDelegate>
-    
-    @property (nonatomic) Record360 *record360;
+@property (nonatomic) Record360 *record360;
 
-    @end
+@end
 
-    @implementation
+@implementation
 
-    - (void)viewDidLoad {
-      [super viewDidLoad];
+- (void)viewDidLoad {
+    [super viewDidLoad];
 
-      self.record360 = [[Record360 alloc] initWithDelegate:self];
-    }
+    self.record360 = [[Record360 alloc] initWithDelegate:self];
+}
+```
 
-    - (IBAction)startInspection:(UIButton *)sender {
-      Record360ViewController *record360ViewController = [Record360ViewController loadControllerWithUserName:@"testuser@record360.com" andPassword:@"P@ssword!" sendTo:self.record360 displayOn:self];
-      record360ViewController.delegate = self;
-    }
+4. Proceed through the Record360 application flow:
 
-Depending on the state of the inspection in the workflow, the user will either be prompted to create a new inspection or resume their already existing inspection.  All entry points are asynchronous.  Any logic that depends on loading the Record360ViewController should be placed in the workflow event callbacks passed to your Record360ViewControllerDelegate object (see below).
+![Car Front](./images/car-front.png)
 
-### Adding workflow settings
-  
-    [record360ViewController applyDefaultSettings:@[
-                        [[Record360Setting alloc] initSwitchSetting:SETTING_NOTATIONS_ON_IMAGES canDisplay:NO value:NO],
-                        [[Record360Setting alloc] initSwitchSetting:SETTING_VIN_SCAN canDisplay:YES value:NO],
-                        [[Record360Setting alloc] initSwitchSetting:SETTING_NATIVE_PHOTO_MODE canDisplay:NO value:NO],
-                        [[Record360Setting alloc] initOptionSetting:SETTING_RESOLUTION canDisplay:YES value:RESOLUTION_MEDIUM],
-                        [[Record360Setting alloc] initOptionSetting:SETTING_UPLOAD_MODE canDisplay:YES value:UPLOAD_MODE_ONLINE],
-                        [[Record360Setting alloc] initSetting:SETTING_SEND_SUPPORT_LOG],
-                        [[Record360Setting alloc] initSetting:SETTING_LOGOUT],
-                        [[Record360Setting alloc] initSetting:SETTING_RATE_RECORD360],
-                        [[Record360Setting alloc] initSetting:SETTING_LINKS label:@"Privacy" link:@"https://www.record360.com/privacy"],
-                        [[Record360Setting alloc] initSetting:SETTING_VERSION]
-                    ]];
+![Car Angle](./images/car-angle.png)
 
-Settings should be applied in one of the workflow event callbacks called on your Record360ViewControllerDelegate object. 
+5. After the inspection has finished or is canceled by the user, one of the Record360ViewController delegate methods will be called.
 
-### Responding to workflow events
+```objectivec
+- (void)onInspectionComplete;
+- (void)onInspectionCanceled;
+```
 
-Implement the below Record360ViewControllerDelegate protocol to respond to workflow events:
-  
-    @protocol Record360ViewControllerDelegate <NSObject>
+6. If the inspection is uploading, implement the callbacks as specified by the Record360Delegate protocol.  When the Record360 object has finished uploading an inspection, one of the Record360Delegate methods will be called.
 
-    - (void)onInspectionComplete;
-    - (void)onInspectionCanceled;
+```objectivec
+- (void)onInspectionUploadedForReferenceNumber:(nonnull NSString *)referenceNumber;
+- (void)onInspectionUploadFailedForReferenceNumber:(nonnull NSString *)referenceNumber withError:(nonnull NSError *)error;
+- (void)onInspectionUploadDeletedForReferenceNumber:(nonnull NSString *)referenceNumber;
+```
 
-    @optional
-    - (void)onReferenceNumberEntered:(NSString *)referenceNumber completion:(void (^)(void))completion;
-    - (void)onSuccessfulAuthenticationWithToken:(NSString *)userToken andUserId:(NSString *)userId;
-    - (void)onFailedAuthentication:(NSError *)error;
+# Record360 Class
 
-    @end
+This object handles inspection uploads.  If there are remaining inspections that haven’t been processed, the instance you create will process them when online.
 
-Any object set up as the delegate of the Record360ViewController object will receive these delegate callbacks that represent the different events that occur during an inspection.
+Use the init method below to create a Record360 class:
 
-### Responding to inspection upload events
+```objectivec
+- (nonnull Record360 *)initWithDelegate:(nullable id <Record360Delegate>)delegate;
+```
 
-Implement the below Record360Delegate protocol to respond to inspection upload events:
+Get/Set the property below for the upload mode.  Options include online, offline or wifi-only.  In wifi-only mode, the inspections will be uploaded when a wifi network is available.
 
-    @protocol Record360Delegate <NSObject>
+```objectivec
+@property (nonatomic, assign) UploadMode uploadMode;
+```
 
-    - (void)onInspectionUploadedForReferenceNumber:(NSString *)referenceNumber;
-    - (void)onInspectionUploadFailedForReferenceNumber:(NSString *)referenceNumber withError:(NSError *)error;
-    - (void)onInspectionUploadDeletedForReferenceNumber:(NSString *)referenceNumber;
+The method below returns the number of inspections that are ready for upload.  Inspections that are in the process of uploading will be included in this count.
 
-    @optional
-    - (void)onUploadBytesComplete:(long long)bytesComplete ofTotal:(long long)bytesTotal forReferenceNumber:(NSString *)referenceNumber;
+```objectivec
+- (NSUInteger)getInspectionsReadyForUploadCount;
+```
 
-    @end
+Use the method below to manually start uploading inspections:
 
-Any object set up as the delegate of the Record360 object will receive these delegate callbacks that represent the different events that occur while an inspection is uploading.
+```objectivec
+- (void)startUploading;
+```
 
-Please see the detailed instructions in our [SDK documentation](https://github.com/Record360/record360-sdk-ios/blob/master/iOSSDK.pdf)
+Use the method below to manually stop uploading inspections:
+
+```objectivec
+- (void)stopUploading;
+```
+
+Use the method below to show a progress dialog UI over the passed in UIViewController:
+
+```objectivec
+- (void)showProgressDialogOnViewController:(nonnull UIViewController *)rootViewController onControllerClose:(nullable void (^)(void))onClose;
+```
+
+# Record360Delegate
+
+Use these delegate methods to respond to various inspection upload events:
+
+```objectivec
+- (void)onInspectionUploadedForReferenceNumber:(nonnull NSString *)referenceNumber;
+- (void)onInspectionUploadFailedForReferenceNumber:(nonnull NSString *)referenceNumber withError:(nonnull NSError *)error;
+- (void)onInspectionUploadDeletedForReferenceNumber:(nonnull NSString *)referenceNumber;
+
+@optional
+- (void)onUploadBytesComplete:(long long)bytesComplete ofTotal:(long long)bytesTotal forReferenceNumber:(nonnull NSString *)referenceNumber;
+```
+
+# Record360ViewController Class
+
+Use one of the below factory methods to create the Record360ViewController object that enters and displays the workflow.
+
+These methods let the user specify their own reference number:
+
+```objectivec
++ (Record360ViewController *)loadControllerLoginAndSendTo:(Record360 *)record360 withReferenceNumber:(nullable NSString *)referenceNumber workOrderId:(NSNumber *)workOrderId workOrderLabel:(NSString *)workOrderLabel displayOn:(UIViewController *)rootViewController showCancelButton:(BOOL)showCancel withLoginUsername:(nullable NSString *)username;
+
++ (Record360ViewController *)loadControllerWithUserName:(NSString *)userName andPassword:(NSString *)password andReferenceNumber:(nullable NSString *)referenceNumber workOrderId:(nullable NSNumber *)workOrderId workOrderLabel:(nullable NSString *)workOrderLabel sendTo:(Record360 *)record360 displayOn:(UIViewController *)rootViewController;
+
++ (Record360ViewController *)loadControllerWithUserToken:(NSString *)userToken andReferenceNumber:(nullable NSString *)referenceNumber workOrderId:(nullable NSNumber *)workOrderId workOrderLabel:(nullable NSString *)workOrderLabel sendTo:(Record360 *)record360 displayOn:(UIViewController *)rootViewController;
+
++ (Record360ViewController *)loadControllerWithUserToken:(NSString *)userToken andUserId:(NSString *)userId andReferenceNumber:(nullable NSString *)referenceNumber workOrderId:(nullable NSNumber *)workOrderId workOrderLabel:(nullable NSString *)workOrderLabel sendTo:(Record360 *)record360 displayOn:(UIViewController *)rootViewController;
+
++ (Record360ViewController *)loadControllerWithUserToken:(NSString *)userToken userId:(NSString *)userId referenceNumber:(nullable NSString *)referenceNumber workOrderId:(nullable NSNumber *)workOrderId workOrderLabel:(nullable NSString *)workOrderLabel andIsOneTimeLink:(BOOL)isOneTimeUseLink sendTo:(Record360 *)record360 displayOn:(UIViewController *)rootViewController;
+```
+
+These methods automatically insert a reference number:
+
+```objectivec
++ (Record360ViewController *)loadControllerLoginAndSendTo:(Record360 *)record360 displayOn:(UIViewController *)rootViewController showCancelButton:(BOOL)showCancel withLoginUsername:(nullable NSString *)username;
+
++ (Record360ViewController *)loadControllerLoginAndSendTo:(Record360 *)record360 withTaskId:(NSString *)taskId displayOn:(UIViewController *)rootViewController showCancelButton:(BOOL)showCancel withLoginUsername:(nullable NSString *)username;
+
++ (Record360ViewController *)loadControllerWithUserName:(NSString *)userName andPassword:(NSString *)password sendTo:(Record360 *)record360 displayOn:(UIViewController *)rootViewController;
+
++ (Record360ViewController *)loadControllerWithUserName:(NSString *)userName andPassword:(NSString *)password andTaskId:(NSString *)taskId sendTo:(Record360 *)record360 displayOn:(UIViewController *)rootViewController;
+
++ (Record360ViewController *)loadControllerWithUserToken:(NSString *)userToken andUserId:(NSString *)userId sendTo:(Record360 *)record360 displayOn:(UIViewController *)rootViewController;
+
++ (Record360ViewController *)loadControllerWithUserToken:(NSString *)userToken andUserId:(nullable NSString *)userId andTaskId:(NSString *)taskId sendTo:(Record360 *)record360 displayOn:(UIViewController *)rootViewController;
+
++ (Record360ViewController *)loadControllerWithRefreshToken:(NSString *)authToken sendTo:(Record360 *)record360 displayOn:(UIViewController *)rootViewController success:(void (^)(void))success failure:(void (^)(RefreshTokenError refreshErrorCode))failure;
+```
+
+Use the above factory methods starting with the signature `loadControllerLoginAndSendTo` to have the SDK display the login UI before entering the workflow.  The `Record360` object will upload the resulting inspection.  The `rootViewController` will be used to show the view.
+
+Use one of the methods below to configure the Record360ViewController object to modify the workflow process.  Some of these settings are preset, while others are customizable.  See the [Record360Setting](#Record360Setting) section below for more details.
+
+```objectivec
+- (void)applySettings:(nonnull NSArray<Record360Setting *> *)settings;
+- (void)applyDefaultSettings:(nonnull NSArray<Record360Setting *> *)settings;
+```
+
+Sets whether to show the help screen on workflow entry.  Defaults to false.
+
+```objectivec
+- (void)setShowOnboarding:(BOOL)showOnboarding;
+```
+
+# Record360ViewControllerDelegate
+
+Implement these delegate callbacks to hook into the workflow process:
+
+```objectivec
+- (void)onInspectionComplete;
+- (void)onInspectionCanceled;
+
+@optional
+
+- (nonnull NSArray<Record360FieldData *> *)onReferenceNumberEntered:(nonnull NSString *)referenceNumber fieldData:(nonnull NSArray<Record360FieldData *> *)fieldData;
+- (nonnull NSArray<Record360FieldData *> *)onContractFieldData:(nonnull NSArray<Record360FieldData *> *)fieldData;
+- (void)onSuccessfulAuthenticationWithToken:(nonnull NSString *)userToken andUserId:(nonnull NSString *)userId;
+- (void)onFailedAuthentication:(nonnull NSError *)error;
+```
+Use the delegate callback method below to push custom field data into the workflow process.  This data will populate the forms of the workflow as specified.  The [Example](#Example) project also contains a few examples of supplying data to the forms.
+
+```objectivec
+- (nonnull NSArray<Record360FieldData *> *)onReferenceNumberEntered:(nonnull NSString *)referenceNumber fieldData:(nonnull NSArray<Record360FieldData *> *)fieldData;
+```
+
+# Record360Setting
+
+Use one of the below init methods to create a Record360Setting that can be used to modify the workflow process.  Use one of the Setting constants as the settingKey with the appropriate init method.  The [Example](#Example) project contains various settings configurations.
+
+```objectivec
+- (instancetype)initSetting:(nonnull NSString *)settingKey;
+- (instancetype)initSetting:(nonnull NSString *)settingKey label:(nonnull NSString *)label;
+- (instancetype)initSetting:(nonnull NSString *)settingKey canDisplay:(BOOL)canDisplay;
+- (instancetype)initSetting:(nonnull NSString *)settingKey label:(nonnull NSString *)label canDisplay:(BOOL)canDisplay;
+- (instancetype)initSetting:(nonnull NSString *)settingKey label:(nonnull NSString *)label link:(nonnull NSString *)link;
+- (instancetype)initSetting:(nonnull NSString *)settingKey label:(nonnull NSString *)label recipient:(nonnull NSString *)recipient title:(nonnull NSString *)title;
+
+- (instancetype)initOptionSetting:(nonnull NSString *)settingKey value:(nonnull NSString *)value;
+- (instancetype)initOptionSetting:(nonnull NSString *)settingKey canDisplay:(BOOL)canDisplay value:(nonnull NSString *)value;
+
+- (instancetype)initSwitchSetting:(nonnull NSString *)settingKey value:(BOOL)value;
+- (instancetype)initSwitchSetting:(nonnull NSString *)settingKey canDisplay:(BOOL)canDisplay value:(BOOL)value;
+```
+
+Here is a list of settings and their possible values:
+
+```objectivec
+// Setting
+extern NSString * const SETTING_UPLOAD_MODE;
+// Possible values
+extern NSString * const UPLOAD_MODE_ONLINE;
+extern NSString * const UPLOAD_MODE_WIFI_ONLY;
+extern NSString * const UPLOAD_MODE_OFFLINE;
+
+// Setting
+extern NSString * const SETTING_RESOLUTION;
+// Possible values
+extern NSString * const RESOLUTION_MEDIUM;
+extern NSString * const RESOLUTION_HIGH;
+extern NSString * const RESOLUTION_VERY_HIGH;
+
+// On/Off switch settings
+extern NSString * const SETTING_NATIVE_PHOTO_MODE;
+extern NSString * const SETTING_NOTATIONS_ON_IMAGES;
+extern NSString * const SETTING_VIN_SCAN;
+extern NSString * const SETTING_REMEMBER_LOGIN;
+extern NSString * const SETTING_ADD_TIMESTAMP_TO_MEDIA;
+
+// Other settings
+extern NSString * const SETTING_ACCOUNT;
+extern NSString * const SETTING_LOGOUT;
+extern NSString * const SETTING_VERSION;
+extern NSString * const SETTING_SHOW_INTRO_VIDEO;
+extern NSString * const SETTING_SEND_SUPPORT_LOG;
+extern NSString * const SETTING_RATE_RECORD360;
+extern NSString * const SETTING_LINKS;
+extern NSString * const SETTING_SEND_EMAIL;
+```
+
+Questions? 
+
+Alexis Valencia – alex@record360.com
+
+Tobin Pomeroy –tpomeroy@record360.com
+
+Visit us on the web at www.record360.com/business
 
 # License
 
