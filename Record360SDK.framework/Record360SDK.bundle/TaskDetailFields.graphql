@@ -1,0 +1,32 @@
+fragment taskDetailFields on Task {
+    activities {
+        nodes {
+            event
+            createdAt
+            user { name }
+        }
+    }
+    comments {
+        nodes {
+            id
+            body
+            user {
+                id
+                name
+                email
+            }
+            targetId
+            updatedAt
+            createdAt
+            attachments {
+                nodes {
+                    id
+                    filename
+                    createdAt
+                    description
+                    url
+                }
+            }
+        }
+    }
+}

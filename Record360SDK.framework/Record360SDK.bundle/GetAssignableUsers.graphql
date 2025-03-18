@@ -10,10 +10,6 @@ query ($first: Int! $after: String $fullName: String $location: [ID!]) {
                 active
                 role
                 email
-                phoneNumber
-                location { id name timezone }
-                enabledFeatures
-                company { id name active }
             }
         }
     }

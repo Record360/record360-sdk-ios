@@ -3,17 +3,17 @@
 //
 
 typedef NS_ENUM(NSInteger, UploadMode) {
-    UploadModeOnline,
-    UploadModeOffline,
-    UploadModeWifiOnly,
-    UploadModeHybrid
+    UploadModeOnline = 0,
+    UploadModeWifiOnly = 2,
+    UploadModeHybrid = 3
 };
 
 typedef NS_ENUM(NSInteger, RefreshTokenError) {
     RefreshErrorNoUser,
     RefreshErrorFailedLogin,
     RefreshErrorWrongUser,
-    RefreshErrorInactiveUser
+    RefreshErrorInactiveUser,
+    RefreshErrorSuperRestricted
 };
 
 // Setting
@@ -22,7 +22,6 @@ extern NSString * const SETTING_UPLOAD_MODE;
 extern NSString * const UPLOAD_MODE_ONLINE;
 extern NSString * const UPLOAD_MODE_HYBRID;
 extern NSString * const UPLOAD_MODE_WIFI_ONLY;
-extern NSString * const UPLOAD_MODE_OFFLINE;
 
 // Setting
 extern NSString * const SETTING_RESOLUTION;
@@ -34,7 +33,6 @@ extern NSString * const RESOLUTION_VERY_HIGH;
 // On/Off switch settings
 extern NSString * const SETTING_NATIVE_PHOTO_MODE;
 extern NSString * const SETTING_NOTATIONS_ON_IMAGES;
-extern NSString * const SETTING_VIN_SCAN;
 extern NSString * const SETTING_REMEMBER_LOGIN;
 extern NSString * const SETTING_ADD_TIMESTAMP_TO_MEDIA;
 
@@ -47,10 +45,7 @@ extern NSString * const SETTING_SEND_SUPPORT_LOG;
 extern NSString * const SETTING_RATE_RECORD360;
 extern NSString * const SETTING_LINKS;
 extern NSString * const SETTING_SEND_EMAIL;
-extern NSString * const SETTING_BARCODE_CONFIDENCE;
 
-// Symbology Mode Setting
-extern NSString * const SETTING_BARCODE_SYMBOLOGIES;
 // Possible values
 extern NSString * const SYMBOLOGIES_ALL;
 extern NSString * const SYMBOLOGIES_VIN_SCAN;

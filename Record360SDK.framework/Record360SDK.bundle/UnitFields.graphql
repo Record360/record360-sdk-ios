@@ -1,16 +1,10 @@
 fragment unitFields on Unit {
     commentLogs
-    damage
-    damageCost
     drafts { nodes {
         ...inspectionFields
     } }
     externalId
     extended
-    geoCoord {
-      lat
-      lng
-    }
     id
     transactions(department: $departmentId, open: $open) {
         nodes {

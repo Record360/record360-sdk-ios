@@ -1,0 +1,35 @@
+fragment userFields on User {
+    id
+    name
+    email
+    active
+    role
+    enabledFeatures
+    pushNotifications
+    company {
+        id
+        name
+        industry
+        demo
+        billingEnabled
+        planLevel
+    }
+    location {
+        id
+        name
+        active
+        country
+        updatedAt
+        workflow {
+            id
+            body
+        }
+        callDestinations {
+            code
+            inputPattern
+            iconUrl
+            countryName
+            country
+        }
+    }
+}

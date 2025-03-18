@@ -7,37 +7,32 @@
 
 #import <Record360SDK/Record360Constants.h>
 
-@protocol UploadManagerDelegate;
+NS_ASSUME_NONNULL_BEGIN
+
+@class UploadManagerV2;
 
 @protocol Record360Delegate <NSObject>
-
-- (void)onInspectionUploadedForReferenceNumber:(nonnull NSString *)referenceNumber;
-- (void)onInspectionUploadFailedForReferenceNumber:(nonnull NSString *)referenceNumber withError:(nonnull NSError *)error;
-- (void)onInspectionUploadDeletedForReferenceNumber:(nonnull NSString *)referenceNumber;
-
-@optional
-- (void)onUploadBytesComplete:(long long)bytesComplete ofTotal:(long long)bytesTotal forReferenceNumber:(nonnull NSString *)referenceNumber;
-
+- (void)onInspectionUploadedForReferenceNumber:(NSString *)referenceNumber;
+- (void)onInspectionUploadFailedForReferenceNumber:(NSString *)referenceNumber;
+- (void)onInspectionUploadDeletedForReferenceNumber:(NSString *)referenceNumber;
 @end
 
 @interface Record360 : NSObject
 
+@property (nonatomic, strong, readonly) UploadManagerV2 *uploadManager;
+
 @property (nonatomic, assign) UploadMode uploadMode;
 @property (nonatomic, assign) BOOL enableNotifications;
 
-+ (void)setBaseAPIUrl:(nonnull NSString *)baseApiUrl;
-- (nonnull Record360 *)initWithDelegate:(nullable id <Record360Delegate>)delegate;
++ (void)setBaseAPIUrl:(NSString *)baseApiUrl;
+
+- (Record360 *)initWithDelegate:(nullable id <Record360Delegate>)delegate;
 - (void)enableAnalytics:(BOOL)enableAnalytics;
-- (NSUInteger)getInspectionsReadyForUploadCount;
-- (BOOL)isAtLeastOneInspectionUploading;
-- (BOOL)isAtLeastOneUploadError;
-- (void)startUploading;
-- (void)stopUploading;
-- (void)showProgressDialogOnViewController:(nonnull UIViewController *)rootViewController onControllerClose:(nullable void (^)(void))onClose;
-- (void)setUploadManagerDelegate:(id<UploadManagerDelegate>_Nonnull)delegate;
-- (void)retryUploadForInspectionId:(NSString *_Nullable)inspectionId;
+- (void)showProgressDialogOnViewController:(UIViewController *)rootViewController onControllerClose:(nullable void (^)(void))onClose;
 - (BOOL)hasAuthenticatedUser;
 - (nullable NSString *)getAuthenticatedUserId;
 - (void)setDeviceNotificationToken:(nullable NSString *)deviceNotificationToken;
 
 @end
+
+NS_ASSUME_NONNULL_END
