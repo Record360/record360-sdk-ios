@@ -28,30 +28,89 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Record360ViewController : NSObject
 
-+ (Record360ViewController *)loadControllerLoginAndSendTo:(Record360 *)record360 displayOn:(UIViewController *)rootViewController showCancelButton:(BOOL)showCancel withLoginUsername:(nullable NSString *)username;
-+ (Record360ViewController *)loadControllerLoginAndSendTo:(Record360 *)record360 withReferenceNumber:(nullable NSString *)referenceNumber workOrderId:(NSNumber *)workOrderId workOrderLabel:(NSString *)workOrderLabel displayOn:(UIViewController *)rootViewController showCancelButton:(BOOL)showCancel withLoginUsername:(nullable NSString *)username;
-+ (Record360ViewController *)loadControllerLoginAndSendTo:(Record360 *)record360 withTaskId:(NSString *)taskId displayOn:(UIViewController *)rootViewController showCancelButton:(BOOL)showCancel withLoginUsername:(nullable NSString *)username;
++ (Record360ViewController *)loadControllerLoginAndSendTo:(Record360 *)record360
+                                                displayOn:(UIViewController *)rootViewController
+                                        withLoginUsername:(nullable NSString *)username;
 
-+ (Record360ViewController *)loadControllerWithUserName:(NSString *)userName andPassword:(NSString *)password sendTo:(Record360 *)record360 displayOn:(UIViewController *)rootViewController;
-+ (Record360ViewController *)loadControllerWithUserName:(NSString *)userName andPassword:(NSString *)password andReferenceNumber:(nullable NSString *)referenceNumber workOrderId:(nullable NSNumber *)workOrderId workOrderLabel:(nullable NSString *)workOrderLabel sendTo:(Record360 *)record360 displayOn:(UIViewController *)rootViewController;
-+ (Record360ViewController *)loadControllerWithUserName:(NSString *)userName andPassword:(NSString *)password andTaskId:(NSString *)taskId sendTo:(Record360 *)record360 displayOn:(UIViewController *)rootViewController;
++ (Record360ViewController *)loadControllerLoginAndSendTo:(Record360 *)record360
+                                      withReferenceNumber:(nullable NSString *)referenceNumber
+                                              workOrderId:(NSNumber *)workOrderId
+                                           workOrderLabel:(NSString *)workOrderLabel
+                                                displayOn:(UIViewController *)rootViewController
+                                        withLoginUsername:(nullable NSString *)username;
 
-+ (Record360ViewController *)loadControllerWithUserToken:(NSString *)userToken andReferenceNumber:(nullable NSString *)referenceNumber workOrderId:(nullable NSNumber *)workOrderId workOrderLabel:(nullable NSString *)workOrderLabel sendTo:(Record360 *)record360 displayOn:(UIViewController *)rootViewController;
-+ (Record360ViewController *)loadControllerWithUserToken:(NSString *)userToken andUserId:(NSString *)userId sendTo:(Record360 *)record360 displayOn:(UIViewController *)rootViewController;
-+ (Record360ViewController *)loadControllerWithUserToken:(NSString *)userToken andUserId:(NSString *)userId andReferenceNumber:(nullable NSString *)referenceNumber workOrderId:(nullable NSNumber *)workOrderId workOrderLabel:(nullable NSString *)workOrderLabel sendTo:(Record360 *)record360 displayOn:(UIViewController *)rootViewController;
-+ (Record360ViewController *)loadControllerWithUserToken:(NSString *)userToken andUserId:(nullable NSString *)userId andTaskId:(NSString *)taskId sendTo:(Record360 *)record360 displayOn:(UIViewController *)rootViewController;
-+ (Record360ViewController *)loadControllerWithUserToken:(NSString *)userToken userId:(NSString *)userId referenceNumber:(nullable NSString *)referenceNumber workOrderId:(nullable NSNumber *)workOrderId workOrderLabel:(nullable NSString *)workOrderLabel andIsOneTimeLink:(BOOL)isOneTimeUseLink sendTo:(Record360 *)record360 displayOn:(UIViewController *)rootViewController;
++ (Record360ViewController *)loadControllerLoginAndSendTo:(Record360 *)record360
+                                               withTaskId:(NSString *)taskId
+                                                displayOn:(UIViewController *)rootViewController
+                                        withLoginUsername:(nullable NSString *)username;
 
-+ (Record360ViewController *)loadControllerWithRefreshToken:(NSString *)authToken sendTo:(Record360 *)record360 displayOn:(UIViewController *)rootViewController success:(void (^)(void))success failure:(void (^)(RefreshTokenError refreshErrorCode))failure;
++ (Record360ViewController *)loadControllerWithUserName:(NSString *)userName
+                                            andPassword:(NSString *)password
+                                                 sendTo:(Record360 *)record360
+                                              displayOn:(UIViewController *)rootViewController;
+
++ (Record360ViewController *)loadControllerWithUserName:(NSString *)userName
+                                            andPassword:(NSString *)password
+                                     andReferenceNumber:(nullable NSString *)referenceNumber
+                                            workOrderId:(nullable NSNumber *)workOrderId
+                                         workOrderLabel:(nullable NSString *)workOrderLabel
+                                                 sendTo:(Record360 *)record360
+                                              displayOn:(UIViewController *)rootViewController;
+
++ (Record360ViewController *)loadControllerWithUserName:(NSString *)userName
+                                            andPassword:(NSString *)password
+                                              andTaskId:(NSString *)taskId
+                                                 sendTo:(Record360 *)record360
+                                              displayOn:(UIViewController *)rootViewController;
+
++ (Record360ViewController *)loadControllerWithUserToken:(NSString *)userToken
+                                      andReferenceNumber:(nullable NSString *)referenceNumber
+                                             workOrderId:(nullable NSNumber *)workOrderId
+                                          workOrderLabel:(nullable NSString *)workOrderLabel
+                                                  sendTo:(Record360 *)record360
+                                               displayOn:(UIViewController *)rootViewController;
+
++ (Record360ViewController *)loadControllerWithUserToken:(NSString *)userToken
+                                               andUserId:(NSString *)userId
+                                                  sendTo:(Record360 *)record360
+                                               displayOn:(UIViewController *)rootViewController;
+
++ (Record360ViewController *)loadControllerWithUserToken:(NSString *)userToken
+                                               andUserId:(NSString *)userId
+                                      andReferenceNumber:(nullable NSString *)referenceNumber
+                                             workOrderId:(nullable NSNumber *)workOrderId
+                                          workOrderLabel:(nullable NSString *)workOrderLabel
+                                                  sendTo:(Record360 *)record360
+                                               displayOn:(UIViewController *)rootViewController;
+
++ (Record360ViewController *)loadControllerWithUserToken:(NSString *)userToken
+                                               andUserId:(nullable NSString *)userId
+                                               andTaskId:(NSString *)taskId
+                                                  sendTo:(Record360 *)record360
+                                               displayOn:(UIViewController *)rootViewController;
+
++ (Record360ViewController *)loadControllerWithUserToken:(NSString *)userToken
+                                                  userId:(NSString *)userId
+                                         referenceNumber:(nullable NSString *)referenceNumber
+                                             workOrderId:(nullable NSNumber *)workOrderId
+                                          workOrderLabel:(nullable NSString *)workOrderLabel
+                                        andIsOneTimeLink:(BOOL)isOneTimeUseLink
+                                                  sendTo:(Record360 *)record360
+                                               displayOn:(UIViewController *)rootViewController;
+
++ (Record360ViewController *)loadControllerWithRefreshToken:(NSString *)authToken
+                                                     sendTo:(Record360 *)record360
+                                                  displayOn:(UIViewController *)rootViewController
+                                                    success:(void (^)(void))success
+                                                    failure:(void (^)(RefreshTokenError refreshErrorCode))failure;
+
+@property (nonatomic, weak, nullable) id<Record360ViewControllerDelegate> delegate;
 
 - (void)dismissViewController;
 - (void)setShowOnboarding:(BOOL)showOnboarding;
 - (void)setShowIntroVideo:(BOOL)showIntroVideo;
 - (void)applySettings:(NSArray<Record360Setting *> *)settings;
 - (void)applyDefaultSettings:(NSArray<Record360Setting *> *)settings;
-
-@property (nonatomic, weak, nullable) id<Record360ViewControllerDelegate> delegate;
-
 - (void)presentModalController:(UIViewController *)controller;
 - (void)processIntroVideo;
 

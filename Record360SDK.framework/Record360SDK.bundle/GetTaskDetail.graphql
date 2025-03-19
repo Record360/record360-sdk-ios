@@ -1,47 +1,6 @@
 query($id: ID!) {
     task(id: $id) {
-        id
-        name
-        description
-        draft { id department { id } }
-        status
-        type
-        unit { id externalId }
-        location { id name company { id } }
-        assignee { id name email }
-        dueBy
-        highPriority
-        updatedAt
-        requester { name email }
-        activities {
-            nodes {
-                event
-                createdAt
-                user { name email }
-            }
-        }
-        comments {
-            nodes {
-                id
-                body
-                user {
-                    id
-                    name
-                    email
-                }
-                targetId
-                updatedAt
-                createdAt
-                attachments {
-                    nodes {
-                        id
-                        filename
-                        createdAt
-                        description
-                        url
-                    }
-                }
-            }
-        }
+        ...taskFields,
+        ...taskDetailFields
     }
 }

@@ -7,6 +7,11 @@ fragment transactionFields on Transaction {
         ...inspectionFields
     }}
     sequence
-    workflow { id }
-	workflowModules
+    workflow { id
+        location {
+            id
+            name
+        }
+    }
+    workflowModules
 }

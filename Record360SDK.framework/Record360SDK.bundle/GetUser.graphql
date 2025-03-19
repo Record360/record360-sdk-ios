@@ -1,28 +1,5 @@
 query {
     user {
-        id
-        name
-        email
-        active
-        role
-        enabledFeatures
-        pushNotifications
-        company {
-            id
-            industry
-            demo
-            billingEnabled
-            planLevel
-        }
-        location {
-            id
-            name
-            active
-            updatedAt
-            workflow {
-                id
-                body
-            }
-        }
+        ...userFields
     }
 }

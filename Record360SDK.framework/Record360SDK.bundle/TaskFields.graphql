@@ -1,0 +1,15 @@
+fragment taskFields on Task {
+    id
+    assignee { id name }
+    updatedAt
+    draft { id department { id } }
+    description
+    dueBy
+    highPriority
+    location { id name }
+    name
+    requester { name }
+    status
+    type
+    unit { id externalId }
+}

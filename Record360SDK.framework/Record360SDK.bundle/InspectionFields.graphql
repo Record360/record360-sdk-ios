@@ -8,8 +8,8 @@ fragment inspectionFields on Inspection {
     }
     draft
     event
-    extended
     notations
+    notationsExtended
     forms {
         nodes {
             id
@@ -42,6 +42,8 @@ fragment inspectionFields on Inspection {
             }
             size
             thumbnailUrl
+            instruction
+            fileId
         }
     }
     videos {

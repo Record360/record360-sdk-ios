@@ -6,12 +6,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class Setting;
+
 @interface Record360Setting : NSObject
 
-@property (nonatomic, copy, readonly, nonnull) NSString *settingKey;
-@property (nonatomic, readonly, nonnull) NSNumber *settingType;
-@property (nonatomic, copy, readonly, nonnull) NSString *label;
-@property (nonatomic, readonly, nonnull) NSNumber *canDisplay;
+@property (nonatomic, strong, readonly) NSString *settingKey;
+@property (nonatomic, strong, readonly) NSString *label;
+@property (nonatomic, strong, readonly) NSNumber *settingType;
+@property (nonatomic, strong, readonly) NSNumber *canDisplay;
 
 - (instancetype)initSetting:(NSString *)settingKey;
 - (instancetype)initSetting:(NSString *)settingKey label:(NSString *)label;
@@ -26,15 +28,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initSwitchSetting:(NSString *)settingKey value:(BOOL)value;
 - (instancetype)initSwitchSetting:(NSString *)settingKey canDisplay:(BOOL)canDisplay value:(BOOL)value;
 
-- (instancetype)initSliderSetting:(NSString *)settingKey value:(float)value;
-- (instancetype)initSliderSetting:(NSString *)settingKey canDisplay:(BOOL)canDisplay value:(float)value;
-
 - (void)save;
 - (nullable NSNumber *)loadSwitchValue;
 - (nullable NSString *)loadSelectionValue;
 - (nullable NSNumber *)loadSelectionValueCode;
 - (nullable NSString *)loadLink;
-    
+
+- (void)updateSettingToMatch:(Setting *)setting;
+
 + (NSString *)getSettingOptionValueForNumber:(NSNumber *)number andSettingKey:(NSString *)settingKey;
 
 @end
