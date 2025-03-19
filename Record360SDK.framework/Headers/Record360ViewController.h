@@ -34,8 +34,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (Record360ViewController *)loadControllerLoginAndSendTo:(Record360 *)record360
                                       withReferenceNumber:(nullable NSString *)referenceNumber
-                                              workOrderId:(NSNumber *)workOrderId
-                                           workOrderLabel:(NSString *)workOrderLabel
+                                              workOrderId:(nullable NSNumber *)workOrderId
+                                           workOrderLabel:(nullable NSString *)workOrderLabel
                                                 displayOn:(UIViewController *)rootViewController
                                         withLoginUsername:(nullable NSString *)username;
 
