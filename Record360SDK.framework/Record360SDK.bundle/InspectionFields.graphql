@@ -8,6 +8,7 @@ fragment inspectionFields on Inspection {
     }
     draft
     event
+    extended
     notations
     notationsExtended
     forms {

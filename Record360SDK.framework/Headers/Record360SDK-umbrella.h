@@ -11,8 +11,10 @@
 #endif
 
 #import "Record360.h"
+#import "Record360AuthAlerts.h"
 #import "Record360Constants.h"
 #import "Record360FieldData.h"
+#import "Record360Identity.h"
 #import "Record360Setting.h"
 #import "Record360ViewController.h"
 

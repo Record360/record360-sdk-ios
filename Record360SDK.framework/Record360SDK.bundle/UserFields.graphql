@@ -22,7 +22,6 @@ fragment userFields on User {
         updatedAt
         workflow {
             id
-            body
         }
         callDestinations {
             code
