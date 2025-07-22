@@ -13,7 +13,8 @@ typedef NS_ENUM(NSInteger, RefreshTokenError) {
     RefreshErrorFailedLogin,
     RefreshErrorWrongUser,
     RefreshErrorInactiveUser,
-    RefreshErrorSuperRestricted
+    RefreshErrorSuperRestricted,
+    RefreshErrorWorkflowRetrievalFailed
 };
 
 // Setting

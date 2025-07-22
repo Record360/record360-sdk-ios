@@ -2,7 +2,7 @@ fragment taskFields on Task {
     id
     assignee { id name }
     updatedAt
-    draft { id department { id } }
+    draft { id department { id label } }
     description
     dueBy
     highPriority
@@ -12,4 +12,7 @@ fragment taskFields on Task {
     status
     type
     unit { id externalId }
+    department { id label }
+    moduleSequence
+    workflow { id }
 }
