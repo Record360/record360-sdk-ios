@@ -10,7 +10,8 @@ Pod::Spec.new do |s|
 	s.license               = { :type => 'commercial', :file => 'LICENSE' }
 	s.authors               = {
 		'Alexis Valencia' => 'alex@record360.com',
-		'Tobin Pomeroy' => 'tpomeroy@record360.com'
+		'John Detloff' => 'jdetloff@record360.com',
+		'Ando Sonenblick' => 'ando.sonenblick@record360.com'
 	}
 	s.source              	= { :git => 'https://github.com/Record360/record360-sdk-ios.git', :tag => s.version.to_s }
 
