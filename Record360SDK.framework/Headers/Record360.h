@@ -78,11 +78,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)userHasRequestedToExitRecord360;
 
-// The following are exposed as methods to wrap their respective calls so that we don't have to
-// expose internal objects and their APIs externally...
-
-- (void)startUploading;
-
 @end
 
 NS_ASSUME_NONNULL_END

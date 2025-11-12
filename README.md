@@ -37,7 +37,7 @@ Create a Podfile in your Xcode project directory with the following lines.
 platform :ios, '14.0'
 use_frameworks!
 
-pod 'Record360SDK', '~> 4.19.8' 
+pod 'Record360SDK', '~> 4.21.1' 
 ```
 
 From the command line execute `pod install` to add the Record360SDK.
