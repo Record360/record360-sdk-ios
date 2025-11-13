@@ -78,6 +78,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)userHasRequestedToExitRecord360;
 
+- (void)startUploading;
+
 @end
 
 NS_ASSUME_NONNULL_END
