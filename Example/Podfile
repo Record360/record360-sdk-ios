@@ -2,7 +2,7 @@ use_frameworks!
 platform :ios, '14.0'
 
 target 'Example' do
-    pod 'Record360SDK', '4.19.8'
+    pod 'Record360SDK', '4.21.2'
 end
 
 post_install do |installer|

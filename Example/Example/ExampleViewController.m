@@ -5,7 +5,6 @@
 #import <Record360SDK/Record360.h>
 #import <Record360SDK/Record360FieldData.h>
 #import <Record360SDK/Record360Setting.h>
-#import <Record360SDK/Record360ViewController.h>
 #import <Record360SDK/Record360Identity.h>
 
 #import "ExampleViewController.h"
@@ -15,12 +14,10 @@ NSString * const USER_ID_KEY = @"user_id";
 
 @interface ExampleViewController () <Record360Delegate>
 
-@property (nonatomic) Record360 *record360;
-@property (nonatomic) Record360ViewController *record360ViewController;
-
-@property (weak, nonatomic) IBOutlet UITextField *username;
-@property (weak, nonatomic) IBOutlet UITextField *password;
-@property (weak, nonatomic) IBOutlet UIButton *savedLogin;
+@property (nonatomic, strong) Record360 *record360;
+@property (nonatomic, weak) IBOutlet UITextField *username;
+@property (nonatomic, weak) IBOutlet UITextField *password;
+@property (nonatomic, weak) IBOutlet UIButton *savedLogin;
 @property (nonatomic, assign) BOOL hostingSDKViewController;
 
 @end
@@ -39,41 +36,81 @@ NSString * const USER_ID_KEY = @"user_id";
     [self updateSavedLogin];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - SDKViewController
+
+- (void)presentSDKViewController:(Record360Identity *)identity {
+    [self hostSDKViewController];
+    [self.record360 launchRecord360:identity];
+    [self buildDefaultSettings];
 }
 
-- (IBAction)loginButtonPressed:(UIButton *)sender {
-    if (self.username.text.length > 0 && self.password.text.length > 0) {
-        // Log in with supplied credentials.
-        Record360Identity *identity = [[Record360Identity alloc] initWithUserName:self.username.text password:self.password.text];
-        [self hostSDKViewController: ^{
-            [self.record360 launchRecord360:identity];
-            [self buildDefaultSettings];
-        }];
-    } else {
-        NSLog(@"No credentials provided.  Please enter username and password to try again.");
+- (void)hostSDKViewController {
+    if (self.hostingSDKViewController) {
+        return;
     }
+
+    // remove from any previous host
+
+    [self.record360.sdkViewController.view removeFromSuperview];
+    [self.record360.sdkViewController removeFromParentViewController];
+
+    // add to our view hierarchy
+
+    [self addChildViewController:self.record360.sdkViewController];
+    [self.record360.sdkViewController didMoveToParentViewController:self];
+
+    [self.view addSubview:self.record360.sdkViewController.view];
+
+    [self.record360.sdkViewController.view.topAnchor constraintEqualToAnchor:self.view.topAnchor].active = YES;
+    [self.record360.sdkViewController.view.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor].active = YES;
+    [self.record360.sdkViewController.view.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor].active = YES;
+    [self.record360.sdkViewController.view.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor].active = YES;
+
+    self.hostingSDKViewController = YES;
+}
+
+- (void)dehostSDKViewController {
+
+    if (!self.hostingSDKViewController) {
+        return;
+    }
+
+    [self.record360.sdkViewController willMoveToParentViewController:nil];
+    [self.record360.sdkViewController.view removeFromSuperview];
+    [self.record360.sdkViewController.view removeConstraints:self.view.constraints];
+    [self.record360.sdkViewController removeFromParentViewController];
+
+    self.hostingSDKViewController = NO;
+}
+
+#pragma mark - UI Callbacks
+
+- (IBAction)loginButtonPressed:(UIButton *)sender {
+    if (self.username.text.length == 0 || self.password.text.length == 0) {
+        NSLog(@"No credentials provided.  Please enter username and password to try again.");
+        return;
+    }
+
+    // Log in with supplied credentials.
+    Record360Identity *loginIdentity = [[Record360Identity alloc] initWithUserName:self.username.text password:self.password.text];
+    [self presentSDKViewController:loginIdentity];
 }
 
 - (IBAction)savedLoginButtonPressed:(UIButton *)sender {
     // Login using the token saved from a previous login.
-    Record360Identity *identity = [[Record360Identity alloc] initWithUserID:[[NSUserDefaults standardUserDefaults] stringForKey:USER_ID_KEY] userToken:[[NSUserDefaults standardUserDefaults] stringForKey:USER_TOKEN_KEY]];
-    [self hostSDKViewController: ^{
-        [self.record360 launchRecord360:identity];
-        [self buildDefaultSettings];
-    }];
+    NSString *userID = [[NSUserDefaults standardUserDefaults] stringForKey:USER_ID_KEY];
+    NSString *userToken = [[NSUserDefaults standardUserDefaults] stringForKey:USER_TOKEN_KEY];
+    Record360Identity *loginIdentity = [[Record360Identity alloc] initWithUserID:userID userToken:userToken];
+    [self presentSDKViewController:loginIdentity];
 }
 
 - (IBAction)sdkLoginButtonPressed:(UIButton *)sender {
-    // Use the login page inside the SDK.  No credentials are necessary.
-    Record360Identity *identity = [[Record360Identity alloc] initWithUserName:nil password:nil];
-    [self hostSDKViewController: ^{
-        [self.record360 launchRecord360:identity];
-        [self buildDefaultSettings];
-    }];
+    // Use the login page inside the SDK. No credentials are necessary.
+    Record360Identity *identity = [[Record360Identity alloc] init];
+    [self presentSDKViewController:identity];
 }
+
+#pragma mark - Record360Delegate
 
 // This callback is called after the user has entered a reference id.  Use this to push data into Record360.
 - (NSArray<Record360FieldData *> *)onReferenceNumberEntered:(NSString *)referenceNumber fieldData:(NSArray<Record360FieldData *> *)fieldData {
@@ -81,7 +118,6 @@ NSString * const USER_ID_KEY = @"user_id";
     if (fieldData.count > 2) {
         Record360FieldData *field = fieldData[0];
         field.fieldValue = @"Sample data";
-        
         field = fieldData[1];
         field.fieldValue = referenceNumber;
     }
@@ -95,15 +131,12 @@ NSString * const USER_ID_KEY = @"user_id";
 }
 
 - (void)onFailedAuthentication:(NSError *)error {
-    [self dismissSDKViewController:NO completion:^{
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_ID_KEY];
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_TOKEN_KEY];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        [self updateSavedLogin];
-        NSLog(@"Error logging in %@.  Please check credentials and try again.", error);
-    }];
+    NSLog(@"Error logging in.  Please check credentials and try again.");
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_ID_KEY];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:USER_TOKEN_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self updateSavedLogin];
 }
-
 
 - (void)updateSavedLogin {
     // Optionally, store the login credentials for future logins if that suits your needs.
@@ -117,24 +150,15 @@ NSString * const USER_ID_KEY = @"user_id";
 
 // Notification immediately after a transaction has completed
 - (void)onInspectionComplete {
-    // Show progress dialog
-    [self dismissSDKViewController:NO completion:^{
-        [self.record360 showProgressDialogOnViewController:self];
-        [self updateSavedLogin];
-    }];
+    [self dehostSDKViewController];
+    [self.record360 showProgressDialogOnViewController:self];
+    [self updateSavedLogin];
 }
 
 // Notification immediately after a transaction has cancelled
 - (void)onInspectionCanceled {
-    [self dismissSDKViewController:NO completion:^{
-        [self showDialogTitle:@"Transaction Cancelled" andMessage:nil];
-        [self updateSavedLogin];
-    }];
-}
-
-// Uploading progress notification as transaction is uploaded
-- (void)onUploadBytesComplete:(long long)bytesComplete ofTotal:(long long)bytesTotal forReferenceNumber:(NSString *)referenceNumber {
-    NSLog(@"Upload task progress on %@ at %lld of %lld", referenceNumber, bytesComplete, bytesTotal);
+    [self dehostSDKViewController];
+    [self updateSavedLogin];
 }
 
 // Notification when a transaction has uploaded.  These come from the Record360 object.
@@ -181,62 +205,5 @@ NSString * const USER_ID_KEY = @"user_id";
         [[Record360Setting alloc] initSetting:SETTING_VERSION]
     ]];
 }
-
-#pragma mark - SDKViewController
-
-- (void)hostSDKViewController: (void (^)(void))completion {
-
-    // ok, the sdk ui needs to be totally torn down before being reconstructed via
-    // one of the "launch" methods.  Future revisions to the SDK should address this,
-    // but until then, this means that we must ensure the SDK VC is dismissed before
-    // we can safely host it in preparation for one of the launch methods. Basically,
-    // This effectively makes hostSDKViewController safely re-entrant
-    
-    [self dismissSDKViewController:NO completion:^{
-    
-        // remove from any previous host
-        
-        [self.record360.sdkViewController.view removeFromSuperview];
-        [self.record360.sdkViewController removeFromParentViewController];
-                
-        // add to our view hierarchy
-        
-        [self addChildViewController:self.record360.sdkViewController];
-        [self.record360.sdkViewController didMoveToParentViewController:self];
-        
-        [self.view addSubview:self.record360.sdkViewController.view];
-
-        [self.record360.sdkViewController.view.topAnchor constraintEqualToAnchor:self.view.topAnchor].active = YES;
-        [self.record360.sdkViewController.view.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor].active = YES;
-        [self.record360.sdkViewController.view.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor].active = YES;
-        [self.record360.sdkViewController.view.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor].active = YES;
-
-        self.hostingSDKViewController = YES;
-        
-        completion();
-    }];
-}
-
-- (void)dismissSDKViewController:(BOOL)animated completion: (void (^)(void))completion {
-
-    if (!self.hostingSDKViewController) {
-        completion();
-        return;
-    }
-
-    // dismiss it via its nav controller, then take it out of the view hierarchy
-    
-    UIViewController *viewController = self.record360.sdkViewController.navigationController ?: self.record360.sdkViewController;
-    
-    [viewController dismissViewControllerAnimated:animated completion:^{
-        [self.record360.sdkViewController willMoveToParentViewController:nil];
-        [self.record360.sdkViewController.view removeFromSuperview];
-        [self.record360.sdkViewController.view removeConstraints:self.view.constraints];
-        [self.record360.sdkViewController removeFromParentViewController];
-        self.hostingSDKViewController = NO;
-        completion();
-    }];
-}
-
 
 @end
