@@ -1,5 +1,0 @@
-query($id: ID) {
-    user(id: $id) {
-        ...userFields
-    }
-}

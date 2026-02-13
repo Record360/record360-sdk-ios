@@ -7,16 +7,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NS_ENUM(NSInteger, Record360IdentityType) {
-    Record360IdentityTypeUserNameAndPassword,
-    Record360IdentityTypeToken,
-    Record360IdentityTypeUserIDAndToken,
-    Record360IdentityTypeUserIDAndUserName
-};
-
 @interface Record360Identity : NSObject
 
-@property (nonatomic, assign, readonly) Record360IdentityType type;
 @property (nonatomic, copy, readonly, nullable) NSString *userName;
 @property (nonatomic, copy, readonly, nullable) NSString *password;
 @property (nonatomic, copy, readonly, nullable) NSString *userID;

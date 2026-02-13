@@ -24,7 +24,6 @@ NS_ASSUME_NONNULL_BEGIN
 @optional
 - (void)onSuccessfulAuthenticationWithToken:(NSString *)userToken andUserId:(NSString *)userId;
 - (void)onFailedAuthentication:(NSError *)error;
-- (NSArray<Record360FieldData *> *)onContractFieldData:(NSArray<Record360FieldData *> *)fieldData;
 - (NSArray<Record360FieldData *> *)onReferenceNumberEntered:(NSString *)referenceNumber fieldData:(NSArray<Record360FieldData *> *)fieldData;
 - (void)onInspectionUploadedForReferenceNumber:(NSString *)referenceNumber inspectionJSON:(NSDictionary *)inspectionJSON;
 - (void)onInspectionUploadFailedForReferenceNumber:(NSString *)referenceNumber;
@@ -35,7 +34,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface Record360 : NSObject
 
 @property (nonatomic, strong, readonly) UploadManager *uploadManager;
-@property (nonatomic, strong, readonly) AuthenticationManager *authenticationManager;
 @property (nonatomic, strong, readonly) NotificationManager *notificationManager;
 @property (nonatomic, strong, readonly) Record360ViewController *sdkViewController;
 
@@ -43,7 +41,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL enableNotifications;
 @property (nonatomic, assign, readonly) BOOL allowUserToExitRecord360;
 
++ (void)configureForStaging;
+
 + (void)setBaseAPIUrl:(NSString *)baseApiUrl;
+
++ (void)setRedirectURLScheme:(NSString *)scheme;
+
++ (BOOL)handleAuthRedirectURL:(NSURL *)url;
 
 - (Record360 *)initWithDelegate:(id <Record360Delegate>)delegate allowUserToExitRecord360:(BOOL)allowUserToExitRecord360;
 
@@ -62,10 +66,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSString *)getAuthenticatedUserId;
 
 - (void)setDeviceNotificationToken:(nullable NSString *)deviceNotificationToken;
-
-- (void)loadControllerWithRefreshToken:(NSString *)authToken
-                               success:(void (^)(void))success
-                               failure:(void (^)(RefreshTokenError refreshErrorCode))failure;
 
 - (void)launchRecord360:(Record360Identity *)identity;
 

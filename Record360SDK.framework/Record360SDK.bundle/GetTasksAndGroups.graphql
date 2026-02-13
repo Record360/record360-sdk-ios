@@ -1,0 +1,13 @@
+query($assignee: ID!, $company: [ID!], $overdueDate: ISO8601DateTime, $dueSince: ISO8601DateTime, $status: [TaskStatus!], $type: String) {
+    overdue: tasks(assigneeWithUserGroups: $assignee, company: $company, dueUntil: $overdueDate, status: [idle, started], type: $type, orderBy: {field: DUE_BY, direction: ASC}) {
+        nodes {
+            ...taskFields
+        }
+    }
+
+    upcoming: tasks(assigneeWithUserGroups: $assignee, company: $company, dueSince: $dueSince, status: $status, type: $type, orderBy: {field: DUE_BY, direction: ASC}) {
+        nodes {
+            ...taskFields
+        }
+    }
+}

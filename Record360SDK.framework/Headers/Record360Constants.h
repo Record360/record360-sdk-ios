@@ -8,15 +8,6 @@ typedef NS_ENUM(NSInteger, UploadMode) {
     UploadModeHybrid = 3
 };
 
-typedef NS_ENUM(NSInteger, RefreshTokenError) {
-    RefreshErrorNoUser,
-    RefreshErrorFailedLogin,
-    RefreshErrorWrongUser,
-    RefreshErrorInactiveUser,
-    RefreshErrorSuperRestricted,
-    RefreshErrorWorkflowRetrievalFailed
-};
-
 // Setting
 extern NSString * const SETTING_UPLOAD_MODE;
 // Possible values
