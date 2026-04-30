@@ -16,4 +16,5 @@ fragment taskFields on Task {
     moduleSequence
     workflow { id }
     userGroup { id name deletedAt users { id } }
+    extended
 }

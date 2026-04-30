@@ -23,9 +23,6 @@ fragment inspectionFields on Inspection {
     mailTo
     reference
     typeLabel
-    workOrder {
-        id
-    }
     workflow {
         id
     }
