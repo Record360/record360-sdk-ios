@@ -20,7 +20,7 @@
         "formattedType" : "MultiArray (Float32)",
         "shortDescription" : "",
         "shape" : "[]",
-        "name" : "var_1225",
+        "name" : "var_1210",
         "type" : "MultiArray"
       }
     ],
@@ -45,8 +45,8 @@
       "name" : "MLModelType_neuralNetwork"
     },
     "userDefinedMetadata" : {
-      "com.github.apple.coremltools.conversion_date" : "2026-02-08",
-      "com.github.apple.coremltools.source" : "torch==2.10.0",
+      "com.github.apple.coremltools.conversion_date" : "2026-04-17",
+      "com.github.apple.coremltools.source" : "torch==2.11.0",
       "com.github.apple.coremltools.version" : "9.0",
       "com.github.apple.coremltools.source_dialect" : "TorchScript"
     },
@@ -67,20 +67,20 @@
       "Mvn" : 30,
       "Concat" : 1,
       "InnerProduct" : 53,
-      "PoolingAverage" : 1,
-      "Convolution" : 24,
+      "Convolution" : 23,
       "Gelu" : 8,
       "Scale" : 30,
       "UpsampleBiLinear" : 4,
-      "ReshapeStatic" : 137,
+      "ReshapeStatic" : 136,
       "Transpose" : 76,
+      "ReduceMax" : 1,
       "Softmax" : 1,
       "Squeeze" : 1,
       "Multiply" : 8,
       "SoftmaxND" : 8,
       "Add" : 16,
       "Slice" : 1,
-      "ActivationReLU" : 4,
+      "ActivationReLU" : 3,
       "BatchedMatmul" : 16
     },
     "method" : "predict"

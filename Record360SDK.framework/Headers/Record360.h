@@ -70,8 +70,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)launchRecord360:(Record360Identity *)identity;
 
 - (void)launchReferenceCapture:(nullable NSString *)referenceNumber
-                   workOrderID:(nullable NSNumber *)workOrderID
-                workOrderLabel:(nullable NSString *)workOrderLabel
+           departmentReference:(nullable NSString *)departmentReference
+             sequenceReference:(nullable NSString *)sequenceReference
                       identity:(Record360Identity *)identity;
 
 - (void)launchTask:(nullable NSString *)taskID identity:(Record360Identity *)identity;
