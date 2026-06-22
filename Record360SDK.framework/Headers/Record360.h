@@ -28,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)onInspectionUploadedForReferenceNumber:(NSString *)referenceNumber inspectionJSON:(NSDictionary *)inspectionJSON;
 - (void)onInspectionUploadFailedForReferenceNumber:(NSString *)referenceNumber;
 - (void)onInspectionUploadDeletedForReferenceNumber:(NSString *)referenceNumber;
+- (void)onInspectionUploadProgress:(NSString *)refNum percentComplete:(CGFloat)percentComplete;
 - (void)userHasRequestedToExitRecord360;
 @end
 
@@ -72,6 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)launchReferenceCapture:(nullable NSString *)referenceNumber
            departmentReference:(nullable NSString *)departmentReference
              sequenceReference:(nullable NSString *)sequenceReference
+                     fieldData:(nullable NSDictionary *)fieldData
                       identity:(Record360Identity *)identity;
 
 - (void)launchTask:(nullable NSString *)taskID identity:(Record360Identity *)identity;

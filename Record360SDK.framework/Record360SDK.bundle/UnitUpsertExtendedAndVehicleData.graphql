@@ -1,0 +1,21 @@
+
+
+mutation UnitUpsertExtendedAndVehicleData(
+  $id: String!,
+  $vehicle: UnitUpsertVehicleInput!,
+  $extended: JSON!
+) {
+  unitUpsert(
+    input: {
+      externalId: $id
+      vehicle: $vehicle
+      extended: $extended
+    }
+  ) {
+    unit {
+      id
+      externalId
+    }
+  }
+}
+

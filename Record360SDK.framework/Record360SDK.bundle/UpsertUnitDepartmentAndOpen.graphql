@@ -1,0 +1,7 @@
+mutation UpsertUnitDepartmentAndOpen($id: String!, $departmentId: [ID], $open: Boolean) {
+  unitUpsert(input: { externalId: $id }) {
+    unit {
+		...unitFields
+    }
+  }
+}

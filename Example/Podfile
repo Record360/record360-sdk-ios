@@ -2,7 +2,7 @@ use_frameworks!
 platform :ios, '14.0'
 
 target 'Example' do
-    pod 'Record360SDK', '4.21.2'
+    pod 'Record360SDK', :git => 'git@github.com:Record360/ios.git', :branch => '4.23.6-SDK-Release'
 end
 
 post_install do |installer|
