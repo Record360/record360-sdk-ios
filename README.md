@@ -37,7 +37,7 @@ Create a Podfile in your Xcode project directory with the following lines.
 platform :ios, '14.0'
 use_frameworks!
 
-pod 'Record360SDK', '~> 4.23.2'
+pod 'Record360SDK', '~> 4.23.6'
 ```
 
 From the command line execute `pod install` to add the Record360SDK.
@@ -78,8 +78,9 @@ Record360 *record360 = [[Record360 alloc] initWithDelegate:self allowUserToExitR
 - (void)launchRecord360:(Record360Identity *)identity;
 
 - (void)launchReferenceCapture:(nullable NSString *)referenceNumber
-                   workOrderID:(nullable NSNumber *)workOrderID
-                workOrderLabel:(nullable NSString *)workOrderLabel
+           departmentReference:(nullable NSString *)departmentReference
+             sequenceReference:(nullable NSString *)sequenceReference
+                     fieldData:(nullable NSDictionary *)fieldData
                       identity:(Record360Identity *)identity;
 ```
 
@@ -218,12 +219,6 @@ Get/Set the property below for the upload mode.  Options include online, offline
 @property (nonatomic, assign) UploadMode uploadMode;
 ```
 
-The method below returns the number of inspections that are ready for upload.  Inspections that are in the process of uploading will be included in this count.
-
-```objectivec
-- (NSUInteger)getInspectionsReadyForUploadCount;
-```
-
 Use the method below to manually start uploading inspections:
 
 ```objectivec
@@ -242,12 +237,13 @@ Present the Record360 User Interaface:
 - (void)launchRecord360:(Record360Identity *)identity;
 ```
 
-Present the Record360 User Interaface, allowing you to provide a reference number of the Unit / Asset to begin an insepction with. 
+Present the Record360 User Interaface, and navigate directly into the pre-inspection flow, allowing you to prefill a Unit's reference number, a department, a sequence, and field data to map into the new inspection.
 
 ```objectivec
 - (void)launchReferenceCapture:(nullable NSString *)referenceNumber
-                   workOrderID:(nullable NSNumber *)workOrderID
-                workOrderLabel:(nullable NSString *)workOrderLabel
+           departmentReference:(nullable NSString *)departmentReference
+             sequenceReference:(nullable NSString *)sequenceReference
+                     fieldData:(nullable NSDictionary *)fieldData
                       identity:(Record360Identity *)identity;
 ```
 
@@ -276,11 +272,11 @@ Use these delegate methods to respond to various inspection upload events:
 
 - (void)onSuccessfulAuthenticationWithToken:(NSString *)userToken andUserId:(NSString *)userId;
 - (void)onFailedAuthentication:(NSError *)error;
-- (NSArray<Record360FieldData *> *)onContractFieldData:(NSArray<Record360FieldData *> *)fieldData;
 - (NSArray<Record360FieldData *> *)onReferenceNumberEntered:(NSString *)referenceNumber fieldData:(NSArray<Record360FieldData *> *)fieldData;
 - (void)onInspectionUploadedForReferenceNumber:(NSString *)referenceNumber inspectionJSON:(NSDictionary *)inspectionJSON;
 - (void)onInspectionUploadFailedForReferenceNumber:(NSString *)referenceNumber;
 - (void)onInspectionUploadDeletedForReferenceNumber:(NSString *)referenceNumber;
+- (void)onInspectionUploadProgress:(NSString *)refNum percentComplete:(CGFloat)percentComplete;
 - (void)userHasRequestedToExitRecord360;
 ```
 
