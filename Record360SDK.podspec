@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
 	}
 	s.source              	= { :git => 'https://github.com/Record360/record360-sdk-ios.git', :tag => s.version.to_s }
 
-	s.ios.deployment_target = '14.0'
+	s.ios.deployment_target = '15.0'
 
 	s.dependency 'CocoaLumberjack', '3.7.4'
 	s.dependency 'Realm', '10.25.0'
