@@ -1,0 +1,10 @@
+query UnitsAndCasesPage($first: Int, $unitsAfter: String, $casesAfter: String) {
+  units(first: $first, after: $unitsAfter, orderBy: { field: LAST_INSPECTION_AT, direction: DESC }) {
+    pageInfo { hasNextPage endCursor }
+    edges { node { id externalId damage lastInspectionAt lastInspectionLocation { id name } lastDecisivCaseId lastDecisivCaseNumber lastDecisivSrmAccount lastDecisivCustomerName lastDecisivRoNumber } }
+  }
+  cases: units(first: $first, after: $casesAfter, decisivCasePresent: true, orderBy: { field: LAST_INSPECTION_AT, direction: DESC }) {
+    pageInfo { hasNextPage endCursor }
+    edges { node { id externalId lastInspectionAt lastInspectionLocation { id name } lastDecisivCaseId lastDecisivCaseNumber lastDecisivRoNumber lastDecisivCustomerName lastDecisivSrmAccount } }
+  }
+}

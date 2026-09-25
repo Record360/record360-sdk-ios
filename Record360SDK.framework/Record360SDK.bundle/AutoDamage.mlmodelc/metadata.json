@@ -45,7 +45,7 @@
       "name" : "MLModelType_neuralNetwork"
     },
     "userDefinedMetadata" : {
-      "com.github.apple.coremltools.conversion_date" : "2026-06-08",
+      "com.github.apple.coremltools.conversion_date" : "2026-09-15",
       "com.github.apple.coremltools.source" : "torch==2.11.0",
       "com.github.apple.coremltools.version" : "9.0",
       "com.github.apple.coremltools.source_dialect" : "TorchScript"

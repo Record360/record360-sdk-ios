@@ -27,7 +27,7 @@ NSString * const USER_ID_KEY = @"user_id";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.record360 = [[Record360 alloc] initWithDelegate:self allowUserToExitRecord360:NO];
+    self.record360 = [[Record360 alloc] initWithDelegate:self allowUserToExitRecord360:NO error:nil];
     [self.record360 startUploading];
 }
 
@@ -148,17 +148,25 @@ NSString * const USER_ID_KEY = @"user_id";
     [self.savedLogin setAlpha:saved ? 1.0F : .5F];
 }
 
-// Notification immediately after a transaction has completed
-- (void)onInspectionComplete {
+- (void)onInspectionCompleteForReferenceNumber:(NSString *)refNum inspectionNonce:(NSString *)nonce {
+    NSLog(@"Inspection completed: %@", nonce);
+}
+
+- (void)onInspectionCancelledForReferenceNumber:(NSString *)refNum inspectionNonce:(NSString *)nonce {
+    NSLog(@"Inspection cancelled: %@", nonce);
+}
+
+- (void)onSDKShouldExit {
     [self dehostSDKViewController];
     [self.record360 showProgressDialogOnViewController:self];
     [self updateSavedLogin];
 }
 
-// Notification immediately after a transaction has cancelled
-- (void)onInspectionCanceled {
+- (void)onSDKShouldRelaunch {
     [self dehostSDKViewController];
-    [self updateSavedLogin];
+
+    Record360Identity *identity = [[Record360Identity alloc] init];
+    [self presentSDKViewController:identity];
 }
 
 // Notification when a transaction has uploaded.  These come from the Record360 object.

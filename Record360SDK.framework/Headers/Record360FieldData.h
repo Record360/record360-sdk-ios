@@ -1,5 +1,6 @@
 //
-// Copyright © 2016 Record360. All rights reserved.
+//  Record360FieldData.h
+//  Record360SDK
 //
 
 #import <Foundation/Foundation.h>

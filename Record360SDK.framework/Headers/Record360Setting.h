@@ -1,5 +1,6 @@
 //
-// Copyright © 2016 Record360. All rights reserved.
+//  Record360Setting.h
+//  Record360SDK
 //
 
 #import <Foundation/Foundation.h>
@@ -37,6 +38,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)updateSettingToMatch:(Setting *)setting;
 
 + (NSString *)getSettingOptionValueForNumber:(NSNumber *)number andSettingKey:(NSString *)settingKey;
+
++ (NSString *)currentBaseAPIURL;
++ (NSString *)defaultBaseAPIURL;
++ (NSString *)overrideBaseAPIURL;
++ (void)setDefaultBaseAPIURL:(NSString *)url;
++ (void)setOverrideBaseAPIURL:(NSString * _Nullable)url;
 
 @end
 

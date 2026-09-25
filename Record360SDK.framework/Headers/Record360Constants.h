@@ -1,5 +1,6 @@
 //
-// Copyright © 2016 Record360. All rights reserved.
+//  Record360Constants.h
+//  Record360SDK
 //
 
 typedef NS_ENUM(NSInteger, UploadMode) {
@@ -31,6 +32,7 @@ extern NSString * const SETTING_ADD_TIMESTAMP_TO_MEDIA;
 // Other settings
 extern NSString * const SETTING_ACCOUNT;
 extern NSString * const SETTING_LOGOUT;
+extern NSString * const SETTING_BASE_API_URL;
 extern NSString * const SETTING_VERSION;
 extern NSString * const SETTING_SHOW_INTRO_VIDEO;
 extern NSString * const SETTING_SEND_SUPPORT_LOG;
