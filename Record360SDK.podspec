@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
 	s.name                  = 'Record360SDK'
-	s.version               = '4.23.6'
+	s.version               = '4.24.7'
 	s.summary               = 'Record360 SDK'
 	s.description           = <<-DESC
 		Record360 is a high-quality property condition reporting tool.  Use this SDK to integrate our damage documentation and dispute resolution tool.

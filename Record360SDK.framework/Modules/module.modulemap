@@ -4,3 +4,8 @@ framework module Record360SDK {
   export *
   module * { export * }
 }
+
+module Record360SDK.Swift {
+  header "Record360SDK-Swift.h"
+  requires objc
+}

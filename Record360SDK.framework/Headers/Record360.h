@@ -1,6 +1,6 @@
 //
-// Record360.h
-// Record360SDK
+//  Record360.h
+//  Record360SDK
 //
 
 #import <Foundation/Foundation.h>
@@ -12,30 +12,29 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class UploadManager;
-@class AuthenticationManager;
-@class NotificationManager;
 @class Record360FieldData;
 @class Record360Setting;
 @class Record360Identity;
 
 @protocol Record360Delegate <NSObject>
-- (void)onInspectionComplete;
-- (void)onInspectionCanceled;
+- (void)onInspectionCompleteForReferenceNumber:(NSString *)refNum inspectionNonce:(NSString *)nonce;
+- (void)onInspectionCancelledForReferenceNumber:(NSString *)refNum inspectionNonce:(NSString *)nonce;
+- (void)onSDKShouldExit;
+- (void)onSDKShouldRelaunch;
 @optional
 - (void)onSuccessfulAuthenticationWithToken:(NSString *)userToken andUserId:(NSString *)userId;
 - (void)onFailedAuthentication:(NSError *)error;
 - (NSArray<Record360FieldData *> *)onReferenceNumberEntered:(NSString *)referenceNumber fieldData:(NSArray<Record360FieldData *> *)fieldData;
-- (void)onInspectionUploadedForReferenceNumber:(NSString *)referenceNumber inspectionJSON:(NSDictionary *)inspectionJSON;
-- (void)onInspectionUploadFailedForReferenceNumber:(NSString *)referenceNumber;
-- (void)onInspectionUploadDeletedForReferenceNumber:(NSString *)referenceNumber;
-- (void)onInspectionUploadProgress:(NSString *)refNum percentComplete:(CGFloat)percentComplete;
-- (void)userHasRequestedToExitRecord360;
+- (void)onInspectionStartedForReferenceNumber:(NSString *)refNum inspectionNonce:(NSString *)nonce;
+- (void)onInspectionUploadedForReferenceNumber:(NSString *)refNum inspectionNonce:(NSString *)nonce inspectionJSON:(NSDictionary *)inspectionJSON;
+- (void)onInspectionUploadFailedForReferenceNumber:(NSString *)refNum inspectionNonce:(NSString *)nonce error:(NSError *)error;
+- (void)onInspectionUploadDeletedForReferenceNumber:(NSString *)refNum inspectionNonce:(NSString *)nonce;
+- (void)onInspectionUploadProgressForReferenceNumber:(NSString *)refNum inspectionNonce:(NSString *)nonce percentComplete:(CGFloat)percentComplete;
 @end
 
 @interface Record360 : NSObject
 
 @property (nonatomic, strong, readonly) UploadManager *uploadManager;
-@property (nonatomic, strong, readonly) NotificationManager *notificationManager;
 @property (nonatomic, strong, readonly) Record360ViewController *sdkViewController;
 
 @property (nonatomic, assign) UploadMode uploadMode;
@@ -50,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (BOOL)handleAuthRedirectURL:(NSURL *)url;
 
-- (Record360 *)initWithDelegate:(id <Record360Delegate>)delegate allowUserToExitRecord360:(BOOL)allowUserToExitRecord360;
+- (Record360 *)initWithDelegate:(id <Record360Delegate>)delegate allowUserToExitRecord360:(BOOL)allowUserToExitRecord360 error:(NSError **)error;
 
 - (void)setShowIntroVideo:(BOOL)showIntroVideo;
 
@@ -78,9 +77,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)launchTask:(nullable NSString *)taskID identity:(Record360Identity *)identity;
 
-- (void)userHasRequestedToExitRecord360;
-
 - (void)startUploading;
+
+- (void)logoutUser;
 
 @end
 

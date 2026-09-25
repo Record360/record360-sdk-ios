@@ -1,6 +1,6 @@
 //
-// Record360ViewController.h
-// Record360SDK
+//  Record360ViewController.h
+//  Record360SDK
 //
 
 #import <Foundation/Foundation.h>
@@ -8,11 +8,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void (^PresentCompletionBlock)(void);
-
 @interface Record360ViewController : UIViewController
 
-- (void)present:(UIViewController *)viewController completion:(PresentCompletionBlock)completion;
+- (void)present:(UIViewController *)viewController;
 
 - (void)showSpinner;
 - (void)hideSpinner;
