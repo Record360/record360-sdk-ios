@@ -10,6 +10,7 @@
 #endif
 #endif
 
+#import "Record360AcuantConstants.h"
 #import "Record360.h"
 #import "Record360Constants.h"
 #import "Record360FieldData.h"

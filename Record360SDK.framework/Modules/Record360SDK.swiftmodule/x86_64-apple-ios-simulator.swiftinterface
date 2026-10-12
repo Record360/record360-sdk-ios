@@ -1,0 +1,33 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.2.3 effective-5.10 (swiftlang-6.2.3.3.21 clang-1700.6.3.2)
+// swift-module-flags: -target x86_64-apple-ios15.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name Record360SDK
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.3
+import Foundation
+import FoundationModels
+import PSPDFKitUI
+@_exported import Record360SDK
+import Swift
+import UIKit
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+@_hasMissingDesignatedInitializers @objc public class AnnotationMenuFilterResult : ObjectiveC.NSObject {
+  @objc final public let filteredMenu: UIKit.UIMenu
+  @objc final public let deleteActionFound: Swift.Bool
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @objc public class PSPDFMenuFilterUtility : ObjectiveC.NSObject {
+  @objc public static let deleteActionIdentifier: Swift.String
+  @objc public static func filterAnnotationMenu(_ menu: UIKit.UIMenu) -> Record360SDK.AnnotationMenuFilterResult
+  @objc override dynamic public init()
+  @objc deinit
+}
+@_inheritsConvenienceInitializers @available(iOS 26.0, *)
+@objc public class TextRevisor : ObjectiveC.NSObject {
+  @objc public static func canRunOnCurrentDevice() -> Swift.Bool
+  #if compiler(>=5.3) && $NonescapableTypes
+  @objc public static func revise(text: Swift.String, completion: @escaping (Foundation.NSString?, Swift.Bool) -> Swift.Void)
+  #endif
+  @objc override dynamic public init()
+  @objc deinit
+}

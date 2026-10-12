@@ -1,8 +1,657 @@
 {
   "ABIRoot": {
     "kind": "Root",
-    "name": "NO_MODULE",
-    "printedName": "NO_MODULE",
+    "name": "Record360SDK",
+    "printedName": "Record360SDK",
+    "children": [
+      {
+        "kind": "Import",
+        "name": "UIKit",
+        "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "Record360SDK"
+      },
+      {
+        "kind": "Import",
+        "name": "PSPDFKitUI",
+        "printedName": "PSPDFKitUI",
+        "declKind": "Import",
+        "moduleName": "Record360SDK"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "AnnotationMenuFilterResult",
+        "printedName": "AnnotationMenuFilterResult",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "filteredMenu",
+            "printedName": "filteredMenu",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "UIMenu",
+                "printedName": "UIKit.UIMenu",
+                "usr": "c:objc(cs)UIMenu"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@Record360SDK@objc(cs)AnnotationMenuFilterResult(py)filteredMenu",
+            "mangledName": "$s12Record360SDK26AnnotationMenuFilterResultC08filteredD0So6UIMenuCvp",
+            "moduleName": "Record360SDK",
+            "declAttributes": [
+              "Final",
+              "HasStorage",
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UIMenu",
+                    "printedName": "UIKit.UIMenu",
+                    "usr": "c:objc(cs)UIMenu"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@Record360SDK@objc(cs)AnnotationMenuFilterResult(im)filteredMenu",
+                "mangledName": "$s12Record360SDK26AnnotationMenuFilterResultC08filteredD0So6UIMenuCvg",
+                "moduleName": "Record360SDK",
+                "implicit": true,
+                "declAttributes": [
+                  "Final",
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "deleteActionFound",
+            "printedName": "deleteActionFound",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@Record360SDK@objc(cs)AnnotationMenuFilterResult(py)deleteActionFound",
+            "mangledName": "$s12Record360SDK26AnnotationMenuFilterResultC17deleteActionFoundSbvp",
+            "moduleName": "Record360SDK",
+            "declAttributes": [
+              "Final",
+              "HasStorage",
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@Record360SDK@objc(cs)AnnotationMenuFilterResult(im)deleteActionFound",
+                "mangledName": "$s12Record360SDK26AnnotationMenuFilterResultC17deleteActionFoundSbvg",
+                "moduleName": "Record360SDK",
+                "implicit": true,
+                "declAttributes": [
+                  "Final",
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "AnnotationMenuFilterResult",
+                "printedName": "Record360SDK.AnnotationMenuFilterResult",
+                "usr": "c:@M@Record360SDK@objc(cs)AnnotationMenuFilterResult"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@Record360SDK@objc(cs)AnnotationMenuFilterResult(im)init",
+            "mangledName": "$s12Record360SDK26AnnotationMenuFilterResultCACycfc",
+            "moduleName": "Record360SDK",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@Record360SDK@objc(cs)AnnotationMenuFilterResult",
+        "mangledName": "$s12Record360SDK26AnnotationMenuFilterResultC",
+        "moduleName": "Record360SDK",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC",
+          "RawDocComment"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "hasMissingDesignatedInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "PSPDFMenuFilterUtility",
+        "printedName": "PSPDFMenuFilterUtility",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "deleteActionIdentifier",
+            "printedName": "deleteActionIdentifier",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@Record360SDK@objc(cs)PSPDFMenuFilterUtility(cpy)deleteActionIdentifier",
+            "mangledName": "$s12Record360SDK22PSPDFMenuFilterUtilityC22deleteActionIdentifierSSvpZ",
+            "moduleName": "Record360SDK",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "HasStorage",
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@Record360SDK@objc(cs)PSPDFMenuFilterUtility(cm)deleteActionIdentifier",
+                "mangledName": "$s12Record360SDK22PSPDFMenuFilterUtilityC22deleteActionIdentifierSSvgZ",
+                "moduleName": "Record360SDK",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final",
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "filterAnnotationMenu",
+            "printedName": "filterAnnotationMenu(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "AnnotationMenuFilterResult",
+                "printedName": "Record360SDK.AnnotationMenuFilterResult",
+                "usr": "c:@M@Record360SDK@objc(cs)AnnotationMenuFilterResult"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "UIMenu",
+                "printedName": "UIKit.UIMenu",
+                "usr": "c:objc(cs)UIMenu"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@Record360SDK@objc(cs)PSPDFMenuFilterUtility(cm)filterAnnotationMenu:",
+            "mangledName": "$s12Record360SDK22PSPDFMenuFilterUtilityC20filterAnnotationMenuyAA0ghD6ResultCSo6UIMenuCFZ",
+            "moduleName": "Record360SDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "PSPDFMenuFilterUtility",
+                "printedName": "Record360SDK.PSPDFMenuFilterUtility",
+                "usr": "c:@M@Record360SDK@objc(cs)PSPDFMenuFilterUtility"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@Record360SDK@objc(cs)PSPDFMenuFilterUtility(im)init",
+            "mangledName": "$s12Record360SDK22PSPDFMenuFilterUtilityCACycfc",
+            "moduleName": "Record360SDK",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@Record360SDK@objc(cs)PSPDFMenuFilterUtility",
+        "mangledName": "$s12Record360SDK22PSPDFMenuFilterUtilityC",
+        "moduleName": "Record360SDK",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "Record360SDK",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "FoundationModels",
+        "printedName": "FoundationModels",
+        "declKind": "Import",
+        "moduleName": "Record360SDK"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "TextRevisor",
+        "printedName": "TextRevisor",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "canRunOnCurrentDevice",
+            "printedName": "canRunOnCurrentDevice()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@Record360SDK@objc(cs)TextRevisor(cm)canRunOnCurrentDevice",
+            "mangledName": "$s12Record360SDK11TextRevisorC21canRunOnCurrentDeviceSbyFZ",
+            "moduleName": "Record360SDK",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "revise",
+            "printedName": "revise(text:completion:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Foundation.NSString?, Swift.Bool) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Tuple",
+                    "printedName": "(Foundation.NSString?, Swift.Bool)",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "Foundation.NSString?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "NSString",
+                            "printedName": "Foundation.NSString",
+                            "usr": "c:objc(cs)NSString"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Bool",
+                        "printedName": "Swift.Bool",
+                        "usr": "s:Sb"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@Record360SDK@objc(cs)TextRevisor(cm)reviseWithText:completion:",
+            "mangledName": "$s12Record360SDK11TextRevisorC6revise4text10completionySS_ySo8NSStringCSg_SbtctFZ",
+            "moduleName": "Record360SDK",
+            "static": true,
+            "objc_name": "reviseWithText:completion:",
+            "declAttributes": [
+              "Final",
+              "AccessControl",
+              "ObjC"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "TextRevisor",
+                "printedName": "Record360SDK.TextRevisor",
+                "usr": "c:@M@Record360SDK@objc(cs)TextRevisor"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@Record360SDK@objc(cs)TextRevisor(im)init",
+            "mangledName": "$s12Record360SDK11TextRevisorCACycfc",
+            "moduleName": "Record360SDK",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@Record360SDK@objc(cs)TextRevisor",
+        "mangledName": "$s12Record360SDK11TextRevisorC",
+        "moduleName": "Record360SDK",
+        "intro_iOS": "26.0",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC",
+          "Available"
+        ],
+        "superclassUsr": "c:objc(cs)NSObject",
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      }
+    ],
     "json_format_version": 8
   },
   "ConstValues": []
