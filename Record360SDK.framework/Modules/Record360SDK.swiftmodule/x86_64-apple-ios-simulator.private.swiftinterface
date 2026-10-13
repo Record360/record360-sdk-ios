@@ -4,24 +4,11 @@
 // swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2.3
 import Foundation
 import FoundationModels
-import PSPDFKitUI
 @_exported import Record360SDK
 import Swift
-import UIKit
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
-@_hasMissingDesignatedInitializers @objc public class AnnotationMenuFilterResult : ObjectiveC.NSObject {
-  @objc final public let filteredMenu: UIKit.UIMenu
-  @objc final public let deleteActionFound: Swift.Bool
-  @objc deinit
-}
-@_inheritsConvenienceInitializers @objc public class PSPDFMenuFilterUtility : ObjectiveC.NSObject {
-  @objc public static let deleteActionIdentifier: Swift.String
-  @objc public static func filterAnnotationMenu(_ menu: UIKit.UIMenu) -> Record360SDK.AnnotationMenuFilterResult
-  @objc override dynamic public init()
-  @objc deinit
-}
 @_inheritsConvenienceInitializers @available(iOS 26.0, *)
 @objc public class TextRevisor : ObjectiveC.NSObject {
   @objc public static func canRunOnCurrentDevice() -> Swift.Bool
