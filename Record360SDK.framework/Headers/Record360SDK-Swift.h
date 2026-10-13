@@ -305,31 +305,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 #if defined(__OBJC__)
 
-@class UIMenu;
-/// Returned by PSPDFMenuFilterUtility.filterAnnotationMenu(_:).
-SWIFT_CLASS("_TtC12Record360SDK26AnnotationMenuFilterResult")
-@interface AnnotationMenuFilterResult : NSObject
-/// The suggestedMenu with inspector, comments, and copy actions removed.
-@property (nonatomic, readonly, strong) UIMenu * _Nonnull filteredMenu;
-/// Whether PSPDFKit’s built-in delete action was present anywhere in the menu tree.
-@property (nonatomic, readonly) BOOL deleteActionFound;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
 @class NSString;
-SWIFT_CLASS("_TtC12Record360SDK22PSPDFMenuFilterUtility")
-@interface PSPDFMenuFilterUtility : NSObject
-/// The raw identifier string for PSPDFKit’s delete action.
-/// Use this when constructing a fallback delete UIAction in Objective-C.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull deleteActionIdentifier;)
-+ (NSString * _Nonnull)deleteActionIdentifier SWIFT_WARN_UNUSED_RESULT;
-/// Removes inspector, comments, and copy actions from a PSPDFKit suggestedMenu,
-/// recursing into any nested UIMenu submenus.
-+ (AnnotationMenuFilterResult * _Nonnull)filterAnnotationMenu:(UIMenu * _Nonnull)menu SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
 SWIFT_CLASS("_TtC12Record360SDK11TextRevisor") SWIFT_AVAILABILITY(ios,introduced=26.0)
 @interface TextRevisor : NSObject
 + (BOOL)canRunOnCurrentDevice SWIFT_WARN_UNUSED_RESULT;
@@ -656,31 +632,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 #if defined(__OBJC__)
 
-@class UIMenu;
-/// Returned by PSPDFMenuFilterUtility.filterAnnotationMenu(_:).
-SWIFT_CLASS("_TtC12Record360SDK26AnnotationMenuFilterResult")
-@interface AnnotationMenuFilterResult : NSObject
-/// The suggestedMenu with inspector, comments, and copy actions removed.
-@property (nonatomic, readonly, strong) UIMenu * _Nonnull filteredMenu;
-/// Whether PSPDFKit’s built-in delete action was present anywhere in the menu tree.
-@property (nonatomic, readonly) BOOL deleteActionFound;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
 @class NSString;
-SWIFT_CLASS("_TtC12Record360SDK22PSPDFMenuFilterUtility")
-@interface PSPDFMenuFilterUtility : NSObject
-/// The raw identifier string for PSPDFKit’s delete action.
-/// Use this when constructing a fallback delete UIAction in Objective-C.
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, copy) NSString * _Nonnull deleteActionIdentifier;)
-+ (NSString * _Nonnull)deleteActionIdentifier SWIFT_WARN_UNUSED_RESULT;
-/// Removes inspector, comments, and copy actions from a PSPDFKit suggestedMenu,
-/// recursing into any nested UIMenu submenus.
-+ (AnnotationMenuFilterResult * _Nonnull)filterAnnotationMenu:(UIMenu * _Nonnull)menu SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
 SWIFT_CLASS("_TtC12Record360SDK11TextRevisor") SWIFT_AVAILABILITY(ios,introduced=26.0)
 @interface TextRevisor : NSObject
 + (BOOL)canRunOnCurrentDevice SWIFT_WARN_UNUSED_RESULT;
