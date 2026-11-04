@@ -8,6 +8,7 @@
 
 #import <Record360SDK/Record360Constants.h>
 #import "Record360ViewController.h"
+#import <Record360SDK/Record360InspectionRecord.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class Record360Identity;
 
 @protocol Record360Delegate <NSObject>
-- (void)onInspectionCompleteForReferenceNumber:(NSString *)refNum inspectionNonce:(NSString *)nonce;
+- (void)onInspectionCompleteForReferenceNumber:(NSString *)refNum inspectionNonce:(NSString *)nonce record:(Record360InspectionRecord *)record;
 - (void)onInspectionCancelledForReferenceNumber:(NSString *)refNum inspectionNonce:(NSString *)nonce;
 - (void)onSDKShouldExit;
 - (void)onSDKShouldRelaunch;
@@ -26,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)onFailedAuthentication:(NSError *)error;
 - (NSArray<Record360FieldData *> *)onReferenceNumberEntered:(NSString *)referenceNumber fieldData:(NSArray<Record360FieldData *> *)fieldData;
 - (void)onInspectionStartedForReferenceNumber:(NSString *)refNum inspectionNonce:(NSString *)nonce;
-- (void)onInspectionUploadedForReferenceNumber:(NSString *)refNum inspectionNonce:(NSString *)nonce inspectionJSON:(NSDictionary *)inspectionJSON;
+- (void)onInspectionUploadedForReferenceNumber:(NSString *)refNum inspectionNonce:(NSString *)nonce record:(Record360InspectionRecord *)record;
 - (void)onInspectionUploadFailedForReferenceNumber:(NSString *)refNum inspectionNonce:(NSString *)nonce error:(NSError *)error;
 - (void)onInspectionUploadDeletedForReferenceNumber:(NSString *)refNum inspectionNonce:(NSString *)nonce;
 - (void)onInspectionUploadProgressForReferenceNumber:(NSString *)refNum inspectionNonce:(NSString *)nonce percentComplete:(CGFloat)percentComplete;
@@ -40,8 +41,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) UploadMode uploadMode;
 @property (nonatomic, assign) BOOL enableNotifications;
 @property (nonatomic, assign, readonly) BOOL allowUserToExitRecord360;
-
-+ (void)configureForStaging;
 
 + (void)setBaseAPIUrl:(NSString *)baseApiUrl;
 
@@ -78,6 +77,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)launchTask:(nullable NSString *)taskID identity:(Record360Identity *)identity;
 
 - (void)startUploading;
+
+- (NSArray<Record360InspectionRecord *> *)inspectionRecords;
+
+- (NSArray<Record360InspectionRecord *> *)inspectionRecordsForStatuses:(NSArray<NSNumber *> *)statuses;
+
+- (nullable Record360InspectionRecord *)inspectionRecordForNonce:(NSString *)inspectionNonce;
 
 - (void)logoutUser;
 
