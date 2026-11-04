@@ -22,4 +22,9 @@ fragment unitFields on Unit {
         model
         year
     }
+    lastDecisivCaseId
+    lastDecisivCaseNumber
+    lastDecisivSrmAccount
+    lastDecisivRoNumber
+    lastDecisivCustomerName
 }

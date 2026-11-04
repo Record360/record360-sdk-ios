@@ -59,8 +59,8 @@ Record360 can provide the framework, contact support@record360.com for more info
 ```
 
 2. Create a Record360 object that will display the Record360 Inspection Interface, handle inspection file uploads and provide information about upload progress events to a delegate.  Pass in the delegate to handle the inspection upload events.
-   If you pass YES to allowUserToExitRecord360, then the SDK will surface a button that when tapped will call the Record360Delegate userHasRequestedToExitRecord360 method. Normally, your
-   implemenation of userHasRequestedToExitRecord360 would then dismiss the SDK View Controller.  If you pass NO, no button will be displayed and your app will be responsible for deciding when to dimiss the SDK View Controller. 
+   If you pass YES to allowUserToExitRecord360, then the SDK will surface a button that when tapped will call the Record360Delegate onSDKShouldExit method. Normally, your
+   implemenation of onSDKShouldExit would then dismiss the SDK View Controller.
 
 ```objectivec    
 Record360 *record360 = [[Record360 alloc] initWithDelegate:self allowUserToExitRecord360:YES];
@@ -175,22 +175,16 @@ Your class should now look something like this:
 7. After login and the completion or cancellation of the the inspection by the user, one of the Record360ViewController delegate methods will be called.
 
 ```objectivec
-- (void)onInspectionComplete;
-- (void)onInspectionCanceled;
+- (void)onInspectionCompleteForReferenceNumber:(NSString *)refNum inspectionNonce:(NSString *)nonce record:(Record360InspectionRecord *)record;
+- (void)onInspectionCancelledForReferenceNumber:(NSString *)refNum inspectionNonce:(NSString *)nonce;
 ```
 
-In both of these methods you should first dismiss the SDK View Controller. For Example:
+Separately, the SDK calls `onSDKShouldExit` or `onSDKShouldRelaunch` exactly once per launch. Dismiss the SDK View Controller in `onSDKShouldExit`, and dismiss then launch again in `onSDKShouldRelaunch`. For Example:
 
 ```objectivec
-- (void)onInspectionComplete {
+- (void)onSDKShouldExit {
     [self dismissSDKViewController:NO completion:^{
         [self.record360 showProgressDialogOnViewController:self];
-    }];
-}
-
-- (void)onInspectionCanceled {
-    [self dismissSDKViewController:NO completion:^{
-        [self showDialogTitle:@"Transaction Cancelled" andMessage:nil];
     }];
 }
 ```
@@ -198,9 +192,9 @@ In both of these methods you should first dismiss the SDK View Controller. For E
 6. If the inspection is uploading, implement the callbacks as specified by the Record360Delegate protocol.  When the Record360 object has finished uploading an inspection, one of the Record360Delegate methods will be called.
 
 ```objectivec
-- (void)onInspectionUploadedForReferenceNumber:(nonnull NSString *)referenceNumber;
-- (void)onInspectionUploadFailedForReferenceNumber:(nonnull NSString *)referenceNumber withError:(nonnull NSError *)error;
-- (void)onInspectionUploadDeletedForReferenceNumber:(nonnull NSString *)referenceNumber;
+- (void)onInspectionUploadedForReferenceNumber:(NSString *)refNum inspectionNonce:(NSString *)nonce record:(Record360InspectionRecord *)record;
+- (void)onInspectionUploadFailedForReferenceNumber:(NSString *)refNum inspectionNonce:(NSString *)nonce error:(NSError *)error;
+- (void)onInspectionUploadDeletedForReferenceNumber:(NSString *)refNum inspectionNonce:(NSString *)nonce;
 ```
 
 # Record360 Class
@@ -265,20 +259,59 @@ Sets whether to show the Record360 Introduction Video.  Defaults to false.
 Use these delegate methods to respond to various inspection upload events:
 
 ```objectivec
-- (void)onInspectionComplete;
-- (void)onInspectionCanceled;
+- (void)onInspectionCompleteForReferenceNumber:(NSString *)refNum inspectionNonce:(NSString *)nonce record:(Record360InspectionRecord *)record;
+- (void)onInspectionCancelledForReferenceNumber:(NSString *)refNum inspectionNonce:(NSString *)nonce;
+- (void)onSDKShouldExit;
+- (void)onSDKShouldRelaunch;
 
 @optional
 
 - (void)onSuccessfulAuthenticationWithToken:(NSString *)userToken andUserId:(NSString *)userId;
 - (void)onFailedAuthentication:(NSError *)error;
 - (NSArray<Record360FieldData *> *)onReferenceNumberEntered:(NSString *)referenceNumber fieldData:(NSArray<Record360FieldData *> *)fieldData;
-- (void)onInspectionUploadedForReferenceNumber:(NSString *)referenceNumber inspectionJSON:(NSDictionary *)inspectionJSON;
-- (void)onInspectionUploadFailedForReferenceNumber:(NSString *)referenceNumber;
-- (void)onInspectionUploadDeletedForReferenceNumber:(NSString *)referenceNumber;
-- (void)onInspectionUploadProgress:(NSString *)refNum percentComplete:(CGFloat)percentComplete;
-- (void)userHasRequestedToExitRecord360;
+- (void)onInspectionStartedForReferenceNumber:(NSString *)refNum inspectionNonce:(NSString *)nonce;
+- (void)onInspectionUploadedForReferenceNumber:(NSString *)refNum inspectionNonce:(NSString *)nonce record:(Record360InspectionRecord *)record;
+- (void)onInspectionUploadFailedForReferenceNumber:(NSString *)refNum inspectionNonce:(NSString *)nonce error:(NSError *)error;
+- (void)onInspectionUploadDeletedForReferenceNumber:(NSString *)refNum inspectionNonce:(NSString *)nonce;
+- (void)onInspectionUploadProgressForReferenceNumber:(NSString *)refNum inspectionNonce:(NSString *)nonce percentComplete:(CGFloat)percentComplete;
 ```
+
+# Record360InspectionRecord
+
+A `Record360InspectionRecord` describes one inspection performed with the SDK: the one currently in progress, one that is uploading, or one that has finished uploading. Records let your app show inspection history and upload state without tracking SDK callbacks itself.
+
+You receive a record in two ways:
+
+- **From delegate callbacks.** `onInspectionCompleteForReferenceNumber:…record:` delivers a record built on the device as soon as the user finishes. `onInspectionUploadedForReferenceNumber:…record:` delivers the final record built from the server's response.
+- **On demand from `Record360`:**
+
+```objectivec
+- (NSArray<Record360InspectionRecord *> *)inspectionRecords;
+- (NSArray<Record360InspectionRecord *> *)inspectionRecordsForStatuses:(NSArray<NSNumber *> *)statuses;
+- (nullable Record360InspectionRecord *)inspectionRecordForNonce:(NSString *)inspectionNonce;
+```
+
+Each record is identified by its `inspectionNonce`, which is the same nonce passed to the delegate callbacks, and carries the inspection's `referenceNumber`. Its `status` is one of:
+
+| Status | Meaning |
+|---|---|
+| `Record360RecordStatusInProgress` | The inspection the user is currently performing. There is at most one, and it has no `recordJSON`. |
+| `Record360RecordStatusUploading` | Completed on the device and waiting to upload or uploading. `recordJSON` is built on the device; server-assigned fields are null. |
+| `Record360RecordStatusFailed` | The upload has stopped. `uploadError` explains why (see below). |
+| `Record360RecordStatusCompletedUpload` | Uploaded. `recordJSON` is the server's final version and `isUploaded` is `YES`. |
+
+`recordJSON` holds the inspection's contents: reference data, field data, checklists, forms and so on. `sourceType` says whether it came from the device (`Record360RecordSourceDevice`) or the server (`Record360RecordSourceServer`). It is nil for the in-progress inspection.
+
+When `status` is `Failed`, `uploadError` is set to an error in `Record360InspectionRecordErrorDomain` with one of these codes:
+
+- `Record360InspectionRecordErrorAuthentication`: the user's credentials are no longer valid.
+- `Record360InspectionRecordErrorMissingMedia`: a photo or video file is missing from the device.
+- `Record360InspectionRecordErrorInspectionLimit`: the account has reached its inspection limit.
+- `Record360InspectionRecordErrorMaxRetriesExhausted`: any other failure, after repeated retries.
+
+The SDK keeps the 50 most recent uploaded records. Records for inspections that haven't finished uploading are kept until they upload.
+
+Records are read-only snapshots. Fetch them again to see the latest status.
 
 # Record360Identity
 
