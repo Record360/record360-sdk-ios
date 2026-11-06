@@ -148,7 +148,7 @@ NSString * const USER_ID_KEY = @"user_id";
     [self.savedLogin setAlpha:saved ? 1.0F : .5F];
 }
 
-- (void)onInspectionCompleteForReferenceNumber:(NSString *)refNum inspectionNonce:(NSString *)nonce {
+- (void)onInspectionCompleteForReferenceNumber:(NSString *)refNum inspectionNonce:(NSString *)nonce record:(Record360InspectionRecord *)record {
     NSLog(@"Inspection completed: %@", nonce);
 }
 
@@ -170,21 +170,21 @@ NSString * const USER_ID_KEY = @"user_id";
 }
 
 // Notification when a transaction has uploaded.  These come from the Record360 object.
-- (void)onInspectionUploadedForReferenceNumber:(NSString *)referenceNumber {
+- (void)onInspectionUploadedForReferenceNumber:(NSString *)referenceNumber inspectionNonce:(NSString *)nonce record:(Record360InspectionRecord *)record {
     NSString *message = [NSString stringWithFormat:@"Transaction %@ uploaded successfully", referenceNumber];
     NSLog(@"%@", message);
     [self showDialogTitle:@"Transaction upload" andMessage:message]; // If the Record360ViewController or progress dialog is loaded and showing, then this alert will not show.
 }
 
 // Notification when a transaction has failed to upload.  These come from the Record360 object.
-- (void)onInspectionUploadFailedForReferenceNumber:(NSString *)referenceNumber withError:(NSError *)error {
+- (void)onInspectionUploadFailedForReferenceNumber:(NSString *)referenceNumber inspectionNonce:(NSString *)nonce withError:(NSError *)error {
     NSString *message = [NSString stringWithFormat:@"An error occurred when uploading the transaction with reference number %@: %@", referenceNumber, error.localizedDescription];
     NSLog(@"%@", message);
     [self showDialogTitle:@"Transaction upload error" andMessage:message]; // If the Record360ViewController or progress dialog is loaded and showing, then this alert will not show.
 }
 
 // Notification when a transaction has stopped uploading due to the user deleting it.  These come from the Record360 object.
-- (void)onInspectionUploadDeletedForReferenceNumber:(NSString *)referenceNumber {
+- (void)onInspectionUploadDeletedForReferenceNumber:(NSString *)referenceNumber inspectionNonce:(NSString *)nonce {
     NSLog(@"Transaction upload with reference number %@ was deleted.", referenceNumber);
 }
 
